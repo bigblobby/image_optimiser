@@ -1,0 +1,18 @@
+{
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.2",
+        "mysql2": "^2.1.0",
+        "sequelize": "^5.21.5",
+        "sharp": "^0.25.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    },
+    "scripts": {
+        "dev": "nodemon app.js",
+        "inspect": "nodemon --inspect app.js"
+    }
+}
