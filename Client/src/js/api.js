@@ -27,7 +27,7 @@ class Api {
         });
     }
 
-    uploadImage(params = {}){
+    uploadImages(params = {}){
         const url = '/api/image/upload';
         return this.post(url, params);
     }
