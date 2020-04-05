@@ -158,7 +158,9 @@ class DragAndDrop extends React.Component {
                     {
                         this.state.displayFiles.length === 0 && (
                             <div className={"drag-and-drop--info"}>
+                                <span className="icon-upload"></span>
                                 <h3>Drag and drop your files or click here</h3>
+                                <h4>(up to 12 images)</h4>
                             </div>
                         )
                     }
