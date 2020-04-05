@@ -1,4 +1,121 @@
 .drag-and-drop {
-    background-color: #c8c8c8;
     height: 100%;
+}
+
+.drag-and-drop {
+    .drag-and-drop--box {
+        position: relative;
+        display: block;
+        background-color: #efefef;
+        height: 100%;
+    }
+}
+
+.drag-and-drop {
+    .drag-and-drop--overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+
+        &.active {
+            background-color: rgba(#000, 0.15);
+        }
+    }
+}
+
+.drag-and-drop {
+    .drag-and-drop--info {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+
+        h3 {
+            font-weight: 400;
+            font-size: 1rem;
+            text-align: center;
+            color: #9e9e9e;
+            margin-bottom: 0;
+            padding: 0 1rem;
+        }
+    }
+}
+
+.drag-and-drop {
+    .drag-and-drop--inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: baseline;
+        height: 100%;
+        padding: 0.5rem;
+
+        .image-container {
+            flex-basis: 33.33333%;
+            height: 25%;
+            padding: 0.5rem;
+
+
+            .image {
+                background-position: center;
+                background-size: cover;
+                height: 100%;
+            }
+        }
+
+    }
+}
+
+.drag-and-drop {
+    .progress-bar--container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        .progress-bar {
+            position: relative;
+            flex-basis: 90%;
+            //height: 100px;
+
+            .track {
+                position: absolute;
+                height: 3px;
+                background-color: #efefef;
+                width: 100%;
+            }
+
+            .progress {
+                position: absolute;
+                height: 3px;
+                width: 0;
+                background-color: green;
+                transition: width 0.2s ease;
+            }
+        }
+
+        .percentage {
+            flex-basis: 10%;
+            padding: 0 1rem;
+            text-align: center;
+        }
+    }
+}
+
+.drag-and-drop {
+    .drag-and-drop--upload-button {
+        display: inline-block;
+
+        &.disabled {
+            cursor: not-allowed;
+        }
+
+        button {
+            &.disabled {
+                pointer-events: none;
+
+            }
+        }
+    }
 }

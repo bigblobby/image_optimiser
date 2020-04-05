@@ -15,9 +15,9 @@ class Api {
         });
     }
 
-    post(url, params){
+    post(url, params, config = {}){
         return new Promise((resolve, reject) => {
-            axios.post(url, params)
+            axios.post(url, params, config)
                 .then(response => {
                     resolve(response.data);
                 }).catch(err => {
@@ -27,9 +27,9 @@ class Api {
         });
     }
 
-    uploadImages(params = {}){
+    uploadImages(params = {}, config){
         const url = '/api/image/upload';
-        return this.post(url, params);
+        return this.post(url, params, config);
     }
 }
 
