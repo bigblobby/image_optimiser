@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid'
+
 class Helpers {
 
     fileListBase64(fileList){
@@ -7,7 +9,11 @@ class Helpers {
                 reader.readAsDataURL(file);
 
                 reader.addEventListener('load', (e) => {
-                    resolve(e.target.result)
+                    const file = {
+                        id: nanoid(),
+                        image: e.target.result,
+                    };
+                    resolve(file)
                 });
             })
         }

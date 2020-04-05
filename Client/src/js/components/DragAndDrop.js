@@ -2,6 +2,8 @@ import React from 'react';
 import Helpers from '../helpers';
 import Api from '../api';
 
+const FILE_LIMIT = 12;
+
 class DragAndDrop extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,9 @@ class DragAndDrop extends React.Component {
             percentCompleted: null,
             uploadComplete: false,
             error: null
-        }
+        };
+
+        this.fileUploadRef = React.createRef();
     }
 
     handleDragEnter = (e) => {
@@ -43,12 +47,26 @@ class DragAndDrop extends React.Component {
         this.handleFiles(files);
     };
 
+    handleDragOver = (e) => {
+        // This is needed - do not remove
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
     handleManualUpload = async (e) => {
         const files = e.target.files;
         this.handleFiles(files);
     };
 
     handleFiles = async(files) => {
+        if(this.state.displayFiles.length + files.length > FILE_LIMIT){
+            this.setState({
+                error: 'You can only upload 12 images at a time'
+            });
+
+            return;
+        }
+
         const uploadImages = [...files];
 
         // Files to show a preview of images to the user
@@ -68,10 +86,18 @@ class DragAndDrop extends React.Component {
         this.clearProgress();
     };
 
+    removeImage = (e, id) => {
+        e.stopPropagation();
+        const files = [...this.state.displayFiles].filter(file => file.id !== id);
+
+        this.setState({ displayFiles: files });
+    };
+
     clearProgress = () => {
         this.setState({
             percentCompleted: null,
             uploadComplete: false,
+            error: null,
         }, this.uploadFiles);
     };
 
@@ -112,16 +138,22 @@ class DragAndDrop extends React.Component {
             });
     };
 
+    openFolder = () => {
+        // This has to be done this way so that remove images can work. Otherwise just us a label htmlFor.
+        this.fileUploadRef.current.click();
+    };
+
     render() {
         return (
             <div className="drag-and-drop">
-                <input className="d-none" id="image-upload" type="file" multiple onChange={this.handleManualUpload}/>
-                <label
+                <input ref={this.fileUploadRef} className="d-none" type="file" multiple onChange={this.handleManualUpload}/>
+                <div
                     className="drag-and-drop--box"
                     onDragEnter={this.handleDragEnter}
                     onDragLeave={this.handleDragLeave}
                     onDrop={this.handleDrop}
-                    htmlFor="image-upload"
+                    onDragOver={this.handleDragOver}
+                    onClick={this.openFolder}
                 >
                     {
                         this.state.displayFiles.length === 0 && (
@@ -136,14 +168,20 @@ class DragAndDrop extends React.Component {
                         {
                             this.state.displayFiles.length > 0 &&  this.state.displayFiles.map(file => {
                                 return (
-                                    <div className="image-container">
-                                        <div className="image" style={{backgroundImage: `url(${file})`}}></div>
+                                    <div className="image-container" onClick={(e) => this.removeImage(e, file.id)}>
+                                        <div className="overlay">
+                                            <p>Remove</p>
+                                        </div>
+                                        <div
+                                            className="image"
+                                            style={{backgroundImage: `url(${file.image})`}}
+                                        ></div>
                                     </div>
                                 )
                             })
                         }
                     </div>
-                </label>
+                </div>
                 {
                     this.state.percentCompleted ? (
                         <div className="progress-bar--container">
@@ -159,11 +197,11 @@ class DragAndDrop extends React.Component {
                         </div>
                     ) : null
                 }
-                {
-                    this.state.error && <div className="invalid-feedback d-block mb-2">{this.state.error}</div>
-                }
                 <div className={"drag-and-drop--upload-button " + (this.state.uploading ? 'disabled' : '')}>
                     <button className={"btn btn-primary " + (this.state.uploading ? 'disabled' : '')} onClick={this.handleSubmit}>Upload</button>
+                    {
+                        this.state.error && <span className="invalid-feedback d-block ml-2">{this.state.error}</span>
+                    }
                 </div>
             </div>
         );
