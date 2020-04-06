@@ -27,8 +27,13 @@ class Api {
         });
     }
 
-    uploadImages(params = {}, config){
-        const url = '/api/image/upload';
+    uploadSingleImage(params = {}, config){
+        const url = '/api/image/upload/single';
+        return this.post(url, params, config);
+    }
+
+    uploadMultipleImages(params = {}, config){
+        const url = '/api/image/upload/multiple';
         return this.post(url, params, config);
     }
 }

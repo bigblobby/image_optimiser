@@ -11,6 +11,7 @@ class DragAndDrop extends React.Component {
         this.state = {
             displayFiles: [],
             uploadFiles: [],
+            downloadFiles: [],
             dragging: false,
             uploading: false,
             percentCompleted: null,
@@ -126,12 +127,13 @@ class DragAndDrop extends React.Component {
             }
         };
 
-        Api.uploadImages(formData, config)
+        Api.uploadMultipleImages(formData, config)
             .then(result => {
                 console.log(result);
                 this.setState({
                     uploading: false,
-                    uploadComplete: true
+                    uploadComplete: true,
+                    downloadFiles: result.images
                 })
             }).catch(err => {
                 console.log(err);
@@ -205,6 +207,14 @@ class DragAndDrop extends React.Component {
                         this.state.error && <span className="invalid-feedback d-block ml-2">{this.state.error}</span>
                     }
                 </div>
+
+                {
+                    this.state.downloadFiles.length === 1 && (
+                        <div className="mt-3">
+                            <a className="btn btn-primary" href={this.state.downloadFiles[0]} download>Download</a>
+                        </div>
+                    )
+                }
             </div>
         );
     }
