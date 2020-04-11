@@ -11,7 +11,10 @@ class DragAndDrop extends React.Component {
         this.state = {
             displayFiles: [],
             uploadFiles: [],
-            downloadFiles: [],
+            downloadFile: {
+                image: null,
+                filename: null
+            },
             dragging: false,
             uploading: false,
             percentCompleted: null,
@@ -112,11 +115,6 @@ class DragAndDrop extends React.Component {
             return;
         }
 
-        const formData = new FormData();
-        for(let file of this.state.uploadFiles){
-            formData.append('images', file);
-        }
-
         const config = {
             onUploadProgress: function(progressEvent) {
                 const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
@@ -127,16 +125,44 @@ class DragAndDrop extends React.Component {
             }
         };
 
-        Api.uploadMultipleImages(formData, config)
-            .then(result => {
-                console.log(result);
-                this.setState({
-                    uploading: false,
-                    uploadComplete: true,
-                    downloadFiles: result.images
-                })
-            }).catch(err => {
+        if(this.state.displayFiles.length > 1){
+            const formData = new FormData();
+            for(let file of this.state.uploadFiles){
+                formData.append('images', file);
+            }
+
+            Api.uploadMultipleImages(formData, config)
+                .then(result => {
+                    this.setState({
+                        uploading: false,
+                        uploadComplete: true,
+                        downloadFile: result
+                    })
+                }).catch(err => {
                 console.log(err);
+            });
+        } else {
+            Api.uploadSingleImage({image: this.state.displayFiles[0].image}, config)
+                .then(result => {
+                    this.setState({
+                        uploading: false,
+                        uploadComplete: true,
+                        downloadFile: result
+                    });
+                })
+        }
+    };
+
+    downloadZip = () => {
+        const filename = this.state.downloadFile.filename;
+
+        Api.downloadZip(`/api/image/download/zip/${filename}`)
+            .then(result => {
+                const link = document.createElement('a');
+                link.href = result;
+                link.setAttribute('download', 'images.zip');
+                document.body.appendChild(link);
+                link.click();
             });
     };
 
@@ -148,7 +174,14 @@ class DragAndDrop extends React.Component {
     render() {
         return (
             <div className="drag-and-drop">
-                <input ref={this.fileUploadRef} className="d-none" type="file" multiple onChange={this.handleManualUpload}/>
+                <input
+                    className="d-none"
+                    ref={this.fileUploadRef}
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    multiple
+                    onChange={this.handleManualUpload}
+                />
                 <div
                     className="drag-and-drop--box"
                     onDragEnter={this.handleDragEnter}
@@ -209,9 +242,16 @@ class DragAndDrop extends React.Component {
                 </div>
 
                 {
-                    this.state.downloadFiles.length === 1 && (
+                    this.state.downloadFile.image && (
                         <div className="mt-3">
-                            <a className="btn btn-primary" href={this.state.downloadFiles[0]} download>Download</a>
+                            <a className="btn btn-primary" href={this.state.downloadFile.image} download>Download</a>
+                        </div>
+                    )
+                }
+                {
+                    this.state.downloadFile.filename && (
+                        <div className="mt-3">
+                            <a className="btn btn-primary" onClick={this.downloadZip}>Download</a>
                         </div>
                     )
                 }

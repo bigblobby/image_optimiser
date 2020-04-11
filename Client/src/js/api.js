@@ -36,6 +36,21 @@ class Api {
         const url = '/api/image/upload/multiple';
         return this.post(url, params, config);
     }
+
+    downloadZip(url){
+        return new Promise((resolve, reject) => {
+            axios({
+                url: url,
+                method: 'GET',
+                responseType: 'blob',
+            }).then(response => {
+                resolve(window.URL.createObjectURL(new Blob([response.data], {type: "application/zip"})));
+            }).catch(err => {
+                console.log(err);
+                reject(err.response.data);
+            })
+        });
+    }
 }
 
 export default new Api();

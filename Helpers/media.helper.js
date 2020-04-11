@@ -69,7 +69,6 @@ function filterWithFile(filepath, settings) {
 }
 
 function filterWithBuffer(settings){
-    // const data = image.replace(/^data:image\/\w+;base64,/, '');
     const parts = settings.filename.image.split(';');
     const mimeType = parts[0].split(':')[1];
     const imageData = parts[1].split(',')[1];
