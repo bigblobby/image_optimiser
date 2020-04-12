@@ -141,7 +141,7 @@ class DragAndDrop extends React.Component {
                             </div>
                             <div className="percentage">
                                 {
-                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : 'Done'
+                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : 'DONE'
                                 }
                             </div>
                         </div>

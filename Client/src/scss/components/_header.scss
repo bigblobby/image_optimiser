@@ -5,8 +5,14 @@
 
 .header {
     .logo-container {
+        height: 100%;
         .logo {
 
+            img {
+                display: block;
+                height: 100%;
+                padding: 0.25rem 0;
+            }
         }
     }
 }
@@ -55,7 +61,7 @@
                         bottom: 0;
                         height: 2px;
                         width: 100%;
-                        background-color: $jagged_ice;
+                        background-color: $red;
                         transform: scale(0);
                         transition: transform 0.2s ease;
                     }

@@ -1,0 +1,17 @@
+.footer {
+    font-size: 13px;
+    height: 50px;
+    margin-top: auto;
+    background-color: $gallery;
+
+    .footer--inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        a {
+            color: $red;
+        }
+    }
+}

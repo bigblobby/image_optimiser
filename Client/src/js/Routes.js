@@ -6,6 +6,7 @@ import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import Homepage from "./pages/Homepage";
 import OptimiserPage from "./pages/OptimiserPage";
 import Base64Page from "./pages/Base64Page";
+import ConvertPage from "./pages/ConvertPage";
 
 import rootReducer from "./reducers";
 import history from "./history";
@@ -31,16 +32,19 @@ export default class Routes extends React.Component {
         return (
             <Provider store={ store }>
                 <ConnectedRouter history={history}>
-                    <div id="content">
+                    <div id="content" className="site-content">
                         <div className="header">
                             <div className="container-fluid max-width">
                                 <div className="header--inner">
                                     <div className="logo-container">
-                                        <Link className="logo" to={'/'}>IMAGE</Link>
+                                        <Link className="logo" to={'/'}>
+                                            <img src="fish.png" alt="Logo"/>
+                                        </Link>
                                     </div>
                                     <nav className="navigation">
                                         <ul>
                                             <NavLink to={'/optimise'}>Optimise</NavLink>
+                                            <NavLink to={'/convert'}>Convert</NavLink>
                                             <NavLink to={'/base64'}>Base64</NavLink>
                                         </ul>
                                     </nav>
@@ -51,7 +55,14 @@ export default class Routes extends React.Component {
                             <Route exact path="/" component={Homepage} />
                             <Route exact path="/optimise" component={OptimiserPage}/>
                             <Route exact path="/base64" component={Base64Page}/>
+                            <Route exact path="/convert" component={ConvertPage}/>
                         </Switch>
+
+                        <div className="footer">
+                            <div className="footer--inner">
+                                <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                            </div>
+                        </div>
                     </div>
                 </ConnectedRouter>
             </Provider>
