@@ -80,56 +80,6 @@ class DragAndDrop extends React.Component {
         this.props.removeImage(id);
     };
 
-    uploadFiles = () => {
-        const self = this;
-
-        if(!this.props.images.length){
-            this.props.updateErrorMessage('Please select files to upload');
-            return;
-        }
-
-        const config = {
-            onUploadProgress: function(progressEvent) {
-                const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                self.props.updateProgress(percentCompleted)
-            }
-        };
-
-        if(this.props.images.length > 1){
-            const formData = new FormData();
-            for(let file of this.props.images){
-                formData.append('images', file.uploadImage);
-            }
-
-            Api.uploadMultipleImages(formData, config)
-                .then(result => {
-                    this.props.triggerUploadComplete(result);
-                }).catch(err => {
-                    console.log(err);
-                });
-        } else {
-            Api.uploadSingleImage({image: this.props.images[0].displayImage}, config)
-                .then(result => {
-                    this.props.triggerUploadComplete(result);
-                }).catch(err => {
-                    console.log(err);
-                });
-        }
-    };
-
-    downloadZip = () => {
-        const filename = this.props.downloadFilename;
-
-        Api.downloadZip(`/api/image/download/zip/${filename}`)
-            .then(result => {
-                const link = document.createElement('a');
-                link.href = result;
-                link.setAttribute('download', 'images.zip');
-                document.body.appendChild(link);
-                link.click();
-            });
-    };
-
     openFolder = () => {
         // This has to be done this way so that remove images can work. Otherwise just us a label htmlFor.
         this.fileUploadRef.current.click();
@@ -197,27 +147,6 @@ class DragAndDrop extends React.Component {
                             </div>
                         </div>
                     ) : null
-                }
-                <div className={"drag-and-drop--upload-button " + (this.props.uploading ? 'disabled' : '')}>
-                    <button className={"btn btn-primary " + (this.props.uploading ? 'disabled' : '')} onClick={this.uploadFiles}>Upload</button>
-                    {
-                        this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
-                    }
-                </div>
-
-                {
-                    this.props.downloadImage && (
-                        <div className="mt-3">
-                            <a className="btn btn-primary" href={this.props.downloadImage} download>Download</a>
-                        </div>
-                    )
-                }
-                {
-                    this.props.downloadFilename && (
-                        <div className="mt-3">
-                            <a className="btn btn-primary" onClick={this.downloadZip}>Download</a>
-                        </div>
-                    )
                 }
             </div>
         );

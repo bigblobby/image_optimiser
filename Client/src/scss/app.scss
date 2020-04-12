@@ -1,7 +1,6 @@
 @import "~bootstrap/scss/functions";
 
-@import "global/colors";
-@import "settings";
+
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -47,8 +46,17 @@
 //@import "~bootstrap/scss/spinners";
 //@import "~bootstrap/scss/print";
 
+@import "global/base";
+@import "global/colors";
+@import "global/buttons";
+@import "global/forms";
+@import "settings";
+
 // ----- Components ----- //
 @import "components/drag_and_drop";
+@import "components/header";
+@import "components/optimiser_options";
 
 // ----- Pages ----- //
 @import "pages/homepage";
+@import "pages/optimiser_page";

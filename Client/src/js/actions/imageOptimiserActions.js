@@ -25,6 +25,10 @@ const updateErrorAction = (message) => ({
     payload: message
 });
 
+const resetOptimiserAction = () => ({
+    type: "RESET"
+});
+
 // Action creators
 
 export function updateDisplayAndUploadFiles(images){
@@ -54,6 +58,12 @@ export function updateProgress(percent){
 export function updateErrorMessage(message){
     return function(dispatch){
         dispatch(updateErrorAction(message));
+    }
+}
+
+export function resetOptimiser(){
+    return function(dispatch){
+        dispatch(resetOptimiserAction());
     }
 }
 

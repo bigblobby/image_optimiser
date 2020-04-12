@@ -1,0 +1,67 @@
+.header {
+    height: 50px;
+    box-shadow: 0 10px 20px rgba($black, 0.02);
+}
+
+.header {
+    .logo-container {
+        .logo {
+
+        }
+    }
+}
+
+// ----- Navigation ----- //
+.header {
+    .header--inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+
+        .navigation {
+            height: 100%;
+
+            ul {
+                padding: 0;
+                margin-bottom: 0;
+                height: 100%;
+
+                a {
+                    position: relative;
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100%;
+                    padding: 0 1rem;
+                    margin-left: 0.5rem;
+                    font-size: 14px;
+
+                    &.active {
+                        &:after {
+                            transform: none;
+                        }
+                    }
+
+                    &:hover {
+                        &:after {
+                            transform: scale(1);
+                        }
+                    }
+
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        height: 2px;
+                        width: 100%;
+                        background-color: $jagged_ice;
+                        transform: scale(0);
+                        transition: transform 0.2s ease;
+                    }
+                }
+            }
+        }
+    }
+}
+// ----- Navigation (END)----- //

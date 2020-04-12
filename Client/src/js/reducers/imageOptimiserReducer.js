@@ -36,6 +36,17 @@ function imageOptimiserReducer(state = initialState, action){
                 uploadComplete: false,
                 percentCompleted: action.payload
             };
+        case "RESET":
+            return {
+                ...state,
+                images: [],
+                downloadImage: null,
+                downloadFilename: null,
+                uploading: false,
+                percentCompleted: null,
+                uploadComplete: false,
+                error: null
+            };
         case "ERROR":
             return {
                 ...state,

@@ -1,0 +1,25 @@
+a {
+    color: $jaguar;
+
+    &:hover {
+        color: darken($mineshaft, 15);
+        text-decoration: none;
+    }
+}
+
+.btn {
+    &.btn--blue {
+        background-color: $bayofmany;
+        color: $white;
+    }
+
+    &.btn--green {
+        background-color: $chateau_green;
+        color: $white;
+    }
+
+    &.btn--red {
+        background-color: $punch;
+        color: $white;
+    }
+}

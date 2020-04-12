@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class Homepage extends React.Component {
+class Base64Page extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -9,10 +9,10 @@ class Homepage extends React.Component {
     render() {
         return (
             <div className="homepage">
-                <p>The hompage</p>
+                <p>Base64 page</p>
             </div>
         );
     }
 }
 
-export default connect(null, null)(Homepage);
+export default connect(null, null)(Base64Page);
