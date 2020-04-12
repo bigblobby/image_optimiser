@@ -9,11 +9,12 @@ class Helpers {
                 reader.readAsDataURL(file);
 
                 reader.addEventListener('load', (e) => {
-                    const file = {
+                    const newFile = {
                         id: nanoid(),
-                        image: e.target.result,
+                        displayImage: e.target.result,
+                        uploadImage: file
                     };
-                    resolve(file)
+                    resolve(newFile)
                 });
             })
         }

@@ -1,6 +1,9 @@
 import React from 'react';
 import Helpers from '../helpers';
 import Api from '../api';
+import { nanoid } from 'nanoid'
+import { connect } from "react-redux";
+import { removeImage, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
 
 const FILE_LIMIT = 12;
 
@@ -9,8 +12,6 @@ class DragAndDrop extends React.Component {
         super(props);
 
         this.state = {
-            displayFiles: [],
-            uploadFiles: [],
             downloadFile: {
                 image: null,
                 filename: null
@@ -63,7 +64,7 @@ class DragAndDrop extends React.Component {
     };
 
     handleFiles = async(files) => {
-        if(this.state.displayFiles.length + files.length > FILE_LIMIT){
+        if(this.props.images.length + files.length > FILE_LIMIT){
             this.setState({
                 error: 'You can only upload 12 images at a time'
             });
@@ -71,15 +72,12 @@ class DragAndDrop extends React.Component {
             return;
         }
 
-        const uploadImages = [...files];
-
-        // Files to show a preview of images to the user
         const images = await Helpers.fileListBase64(files);
+
+        this.props.updateDisplayAndUploadFiles(images);
 
         this.setState(prevState => {
             return {
-                displayFiles: [...prevState.displayFiles, ...images],
-                uploadFiles: [...prevState.uploadFiles, ...uploadImages],
                 dragging: false,
                 error: null
             }
@@ -92,9 +90,7 @@ class DragAndDrop extends React.Component {
 
     removeImage = (e, id) => {
         e.stopPropagation();
-        const files = [...this.state.displayFiles].filter(file => file.id !== id);
-
-        this.setState({ displayFiles: files });
+        this.props.removeImage(id);
     };
 
     clearProgress = () => {
@@ -108,7 +104,7 @@ class DragAndDrop extends React.Component {
     uploadFiles = () => {
         const self = this;
 
-        if(!this.state.displayFiles.length){
+        if(!this.props.images.length){
             this.setState({
                 error: 'Please select files to upload'
             });
@@ -125,10 +121,10 @@ class DragAndDrop extends React.Component {
             }
         };
 
-        if(this.state.displayFiles.length > 1){
+        if(this.props.images.length > 1){
             const formData = new FormData();
-            for(let file of this.state.uploadFiles){
-                formData.append('images', file);
+            for(let file of this.props.images){
+                formData.append('images', file.uploadImage);
             }
 
             Api.uploadMultipleImages(formData, config)
@@ -142,7 +138,7 @@ class DragAndDrop extends React.Component {
                 console.log(err);
             });
         } else {
-            Api.uploadSingleImage({image: this.state.displayFiles[0].image}, config)
+            Api.uploadSingleImage({image: this.props.images[0].displayImage}, config)
                 .then(result => {
                     this.setState({
                         uploading: false,
@@ -191,7 +187,7 @@ class DragAndDrop extends React.Component {
                     onClick={this.openFolder}
                 >
                     {
-                        this.state.displayFiles.length === 0 && (
+                        this.props.images.length === 0 && (
                             <div className={"drag-and-drop--info"}>
                                 <span className="icon-upload"></span>
                                 <h3>Drag and drop your files or click here</h3>
@@ -203,7 +199,7 @@ class DragAndDrop extends React.Component {
                     <div className={"drag-and-drop--overlay " + (this.state.dragging ? 'active' : '')}></div>
                     <div className="drag-and-drop--inner">
                         {
-                            this.state.displayFiles.length > 0 &&  this.state.displayFiles.map(file => {
+                            this.props.images.length > 0 &&  this.props.images.map(file => {
                                 return (
                                     <div className="image-container" onClick={(e) => this.removeImage(e, file.id)}>
                                         <div className="overlay">
@@ -211,7 +207,7 @@ class DragAndDrop extends React.Component {
                                         </div>
                                         <div
                                             className="image"
-                                            style={{backgroundImage: `url(${file.image})`}}
+                                            style={{backgroundImage: `url(${file.displayImage})`}}
                                         ></div>
                                     </div>
                                 )
@@ -260,4 +256,18 @@ class DragAndDrop extends React.Component {
     }
 }
 
-export default DragAndDrop;
+const mapStateToProps = ({imageOptimiser}) => {
+    const {images} = imageOptimiser;
+    return {
+        images
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateDisplayAndUploadFiles: (displayFiles, uploadFiles) => dispatch(updateDisplayAndUploadFiles(displayFiles, uploadFiles)),
+        removeImage: (id) => dispatch(removeImage(id))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragAndDrop);
