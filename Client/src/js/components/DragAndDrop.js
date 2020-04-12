@@ -1,6 +1,5 @@
 import React from 'react';
 import Helpers from '../helpers';
-import Api from '../api';
 import { connect } from "react-redux";
 import {
     removeImage,

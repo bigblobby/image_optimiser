@@ -5,7 +5,7 @@ const initialState = {
     uploading: false,
     percentCompleted: null,
     uploadComplete: false,
-    error: null
+    error: null,
 };
 
 function imageOptimiserReducer(state = initialState, action){

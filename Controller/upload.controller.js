@@ -4,11 +4,18 @@ const fs = require('fs');
 const path =require('path');
 
 async function uploadSingle(req, res){
+    const {width, height, quality} = req.body;
+
+    // TODO validate and sanitise
+    const filterWidth = width && width !== 0 ? Number(width) : null;
+    const filterHeight = height && height !== 0 ? Number(height) : null;
+    const filterQuality = Number(quality);
+
     const settings = {
         filename: req.body,
-        height: 200,
-        width: 200,
-        quality: 90
+        height: filterHeight,
+        width: filterWidth,
+        quality: filterQuality
     };
 
     const filteredImage = await MediaHelper.processImage(settings, 'buffer');
@@ -22,14 +29,20 @@ async function uploadSingle(req, res){
 async function uploadMultiple(req, res){
     const images = req.files;
     const imagePromises = [];
+    const {width, height, quality} = req.body;
+
+    // TODO validate and sanitise
+    const filterWidth = width && width !== 0 ? Number(width) : null;
+    const filterHeight = height && height !== 0 ? Number(height) : null;
+    const filterQuality = Number(quality);
 
     images.forEach(image => {
         const settings = {
             filename: image.filename,
             mimetype: image.mimetype,
-            height: 200,
-            width: 200,
-            quality: 90
+            height: filterHeight,
+            width: filterWidth,
+            quality: filterQuality
         };
 
         imagePromises.push(MediaHelper.processImage(settings, 'file'));

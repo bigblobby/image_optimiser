@@ -9,6 +9,21 @@ import {
 import Api from "../api";
 
 class OptimiserOptions extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            width: null,
+            height: null,
+            quality: 100,
+        }
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
 
     uploadFiles = () => {
         const self = this;
@@ -31,6 +46,10 @@ class OptimiserOptions extends React.Component {
                 formData.append('images', file.uploadImage);
             }
 
+            formData.append('width', this.state.width);
+            formData.append('height', this.state.height);
+            formData.append('quality', this.state.quality);
+
             Api.uploadMultipleImages(formData, config)
                 .then(result => {
                     this.props.triggerUploadComplete(result);
@@ -38,7 +57,12 @@ class OptimiserOptions extends React.Component {
                 console.log(err);
             });
         } else {
-            Api.uploadSingleImage({image: this.props.images[0].displayImage}, config)
+            Api.uploadSingleImage({
+                image: this.props.images[0].displayImage,
+                width: this.state.width,
+                height: this.state.height,
+                quality: this.state.quality,
+            }, config)
                 .then(result => {
                     this.props.triggerUploadComplete(result);
                 }).catch(err => {
@@ -71,17 +95,29 @@ class OptimiserOptions extends React.Component {
                         <div className="form-row">
                             <div className="col-6">
                                 <div className="form-row">
-                                    <div className="col-12 label">Width <span className="help-text">(0 = auto)</span></div>
+                                    <div className="col-12 label">Width <span className="help-text">(Empty = auto)</span></div>
                                     <div className="col-12">
-                                        <input className="form-control" type="text"/>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="width"
+                                            value={this.state.width}
+                                            onChange={this.handleChange}
+                                        />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="form-row">
-                                    <div className="col-12 label">Height <span className="help-text">(0 = auto)</span></div>
+                                    <div className="col-12 label">Height <span className="help-text">(Empty = auto)</span></div>
                                     <div className="col-12">
-                                        <input className="form-control" type="text"/>
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            name="height"
+                                            value={this.state.height}
+                                            onChange={this.handleChange}
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +127,14 @@ class OptimiserOptions extends React.Component {
                         <div className="form-row">
                             <div className="col-6">
                                 <label htmlFor="options_quality">Quality <span className="help-text">(0 - 100)</span></label>
-                                <input className="form-control" type="text" id="options_quality"/>
+                                <input
+                                    className="form-control"
+                                    type="text"
+                                    id="options_quality"
+                                    name="quality"
+                                    value={this.state.quality}
+                                    onChange={this.handleChange}
+                                />
                             </div>
                         </div>
                     </div>
