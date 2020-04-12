@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DragAndDrop from "../components/DragAndDrop";
+import OptimiserOptions from "../components/OptimiserOptions";
 
 class Homepage extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Homepage extends React.Component {
                     <DragAndDrop></DragAndDrop>
                 </div>
                 <div className="control-panel--container">
-
+                    <OptimiserOptions />
                 </div>
             </div>
         );

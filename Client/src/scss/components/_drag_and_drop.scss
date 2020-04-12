@@ -1,12 +1,8 @@
 .drag-and-drop {
-    height: 100%;
-}
-
-.drag-and-drop {
     .drag-and-drop--box {
         position: relative;
         background-color: $gallery;
-        height: 100%;
+        height: 500px;
         cursor: pointer;
     }
 }

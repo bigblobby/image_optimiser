@@ -14,8 +14,8 @@ async function uploadSingle(req, res){
     const filteredImage = await MediaHelper.processImage(settings, 'buffer');
 
     res.status(200).json({
-        image: filteredImage,
-        filename: null
+        downloadImage: filteredImage,
+        downloadFilename: null
     });
 }
 
@@ -39,8 +39,8 @@ async function uploadMultiple(req, res){
     const zipFile = await ZipHelper.zipFiles(filteredImages);
 
     res.status(200).json({
-        image: null,
-        filename: zipFile,
+        downloadImage: null,
+        downloadFilename: zipFile,
     });
 }
 

@@ -1,10 +1,7 @@
 const initialState = {
     images: [],
-    downloadFile: {
-        image: null,
-        filename: null
-    },
-    dragging: false,
+    downloadImage: null,
+    downloadFilename: null,
     uploading: false,
     percentCompleted: null,
     uploadComplete: false,
@@ -23,6 +20,21 @@ function imageOptimiserReducer(state = initialState, action){
             return {
                 ...state,
                 images: images
+            };
+        case "UPLOAD_COMPLETE":
+            return {
+                ...state,
+                uploading: false,
+                uploadComplete: true,
+                ...action.payload
+            };
+        case "UPDATE_PROGRESS":
+            return {
+                ...state,
+                uploading: true,
+                error: null,
+                uploadComplete: false,
+                percentCompleted: action.payload
             };
         case "ERROR":
             return {

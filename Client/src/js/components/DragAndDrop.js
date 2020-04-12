@@ -1,9 +1,14 @@
 import React from 'react';
 import Helpers from '../helpers';
 import Api from '../api';
-import { nanoid } from 'nanoid'
 import { connect } from "react-redux";
-import { removeImage, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
+import {
+    removeImage,
+    updateDisplayAndUploadFiles,
+    triggerUploadComplete,
+    updateProgress,
+    updateErrorMessage
+} from "../actions/imageOptimiserActions";
 
 const FILE_LIMIT = 12;
 
@@ -12,15 +17,7 @@ class DragAndDrop extends React.Component {
         super(props);
 
         this.state = {
-            downloadFile: {
-                image: null,
-                filename: null
-            },
-            dragging: false,
-            uploading: false,
-            percentCompleted: null,
-            uploadComplete: false,
-            error: null
+            dragging: false
         };
 
         this.fileUploadRef = React.createRef();
@@ -65,10 +62,7 @@ class DragAndDrop extends React.Component {
 
     handleFiles = async(files) => {
         if(this.props.images.length + files.length > FILE_LIMIT){
-            this.setState({
-                error: 'You can only upload 12 images at a time'
-            });
-
+            this.props.updateErrorMessage('You can only upload 12 images at a time');
             return;
         }
 
@@ -76,16 +70,9 @@ class DragAndDrop extends React.Component {
 
         this.props.updateDisplayAndUploadFiles(images);
 
-        this.setState(prevState => {
-            return {
-                dragging: false,
-                error: null
-            }
+        this.setState({
+            dragging: false,
         });
-    };
-
-    handleSubmit = () => {
-        this.clearProgress();
     };
 
     removeImage = (e, id) => {
@@ -93,31 +80,18 @@ class DragAndDrop extends React.Component {
         this.props.removeImage(id);
     };
 
-    clearProgress = () => {
-        this.setState({
-            percentCompleted: null,
-            uploadComplete: false,
-            error: null,
-        }, this.uploadFiles);
-    };
-
     uploadFiles = () => {
         const self = this;
 
         if(!this.props.images.length){
-            this.setState({
-                error: 'Please select files to upload'
-            });
+            this.props.updateErrorMessage('Please select files to upload');
             return;
         }
 
         const config = {
             onUploadProgress: function(progressEvent) {
                 const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
-                self.setState({
-                    percentCompleted: percentCompleted,
-                    uploading: true,
-                })
+                self.props.updateProgress(percentCompleted)
             }
         };
 
@@ -129,28 +103,22 @@ class DragAndDrop extends React.Component {
 
             Api.uploadMultipleImages(formData, config)
                 .then(result => {
-                    this.setState({
-                        uploading: false,
-                        uploadComplete: true,
-                        downloadFile: result
-                    })
+                    this.props.triggerUploadComplete(result);
                 }).catch(err => {
-                console.log(err);
-            });
+                    console.log(err);
+                });
         } else {
             Api.uploadSingleImage({image: this.props.images[0].displayImage}, config)
                 .then(result => {
-                    this.setState({
-                        uploading: false,
-                        uploadComplete: true,
-                        downloadFile: result
-                    });
-                })
+                    this.props.triggerUploadComplete(result);
+                }).catch(err => {
+                    console.log(err);
+                });
         }
     };
 
     downloadZip = () => {
-        const filename = this.state.downloadFile.filename;
+        const filename = this.props.downloadFilename;
 
         Api.downloadZip(`/api/image/download/zip/${filename}`)
             .then(result => {
@@ -216,36 +184,36 @@ class DragAndDrop extends React.Component {
                     </div>
                 </div>
                 {
-                    this.state.percentCompleted ? (
+                    this.props.percentCompleted ? (
                         <div className="progress-bar--container">
                             <div className="progress-bar">
                                 <div className="track"></div>
-                                <div className="progress" style={{width: this.state.percentCompleted + '%'}}></div>
+                                <div className="progress" style={{width: this.props.percentCompleted + '%'}}></div>
                             </div>
                             <div className="percentage">
                                 {
-                                    !this.state.uploadComplete ? this.state.percentCompleted + "%" : 'Done'
+                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : 'Done'
                                 }
                             </div>
                         </div>
                     ) : null
                 }
-                <div className={"drag-and-drop--upload-button " + (this.state.uploading ? 'disabled' : '')}>
-                    <button className={"btn btn-primary " + (this.state.uploading ? 'disabled' : '')} onClick={this.handleSubmit}>Upload</button>
+                <div className={"drag-and-drop--upload-button " + (this.props.uploading ? 'disabled' : '')}>
+                    <button className={"btn btn-primary " + (this.props.uploading ? 'disabled' : '')} onClick={this.uploadFiles}>Upload</button>
                     {
-                        this.state.error && <span className="invalid-feedback d-block ml-2">{this.state.error}</span>
+                        this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
                     }
                 </div>
 
                 {
-                    this.state.downloadFile.image && (
+                    this.props.downloadImage && (
                         <div className="mt-3">
-                            <a className="btn btn-primary" href={this.state.downloadFile.image} download>Download</a>
+                            <a className="btn btn-primary" href={this.props.downloadImage} download>Download</a>
                         </div>
                     )
                 }
                 {
-                    this.state.downloadFile.filename && (
+                    this.props.downloadFilename && (
                         <div className="mt-3">
                             <a className="btn btn-primary" onClick={this.downloadZip}>Download</a>
                         </div>
@@ -257,16 +225,25 @@ class DragAndDrop extends React.Component {
 }
 
 const mapStateToProps = ({imageOptimiser}) => {
-    const {images} = imageOptimiser;
+    const {images, uploading, uploadComplete, downloadFilename, downloadImage, percentCompleted, error} = imageOptimiser;
     return {
-        images
+        images,
+        uploading,
+        uploadComplete,
+        downloadFilename,
+        downloadImage,
+        percentCompleted,
+        error,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         updateDisplayAndUploadFiles: (displayFiles, uploadFiles) => dispatch(updateDisplayAndUploadFiles(displayFiles, uploadFiles)),
-        removeImage: (id) => dispatch(removeImage(id))
+        removeImage: (id) => dispatch(removeImage(id)),
+        triggerUploadComplete: (data) => dispatch(triggerUploadComplete(data)),
+        updateProgress: (percent) => dispatch(updateProgress(percent)),
+        updateErrorMessage: (message) => dispatch(updateErrorMessage(message)),
     }
 };
 
