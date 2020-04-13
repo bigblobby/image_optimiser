@@ -21,10 +21,17 @@ class DragAndDrop extends React.Component {
         super(props);
 
         this.state = {
-            dragging: false
+            dragging: false,
+            showTickIcon: false,
         };
 
         this.fileUploadRef = React.createRef();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.uploadComplete !== this.props.uploadComplete){
+            this.addSvgActiveClass();
+        }
     }
 
     handleDragEnter = (e) => {
@@ -101,6 +108,12 @@ class DragAndDrop extends React.Component {
         }
     };
 
+    addSvgActiveClass = () => {
+        setTimeout(() => {
+            this.setState({ showTickIcon: true });
+        }, 0);
+    };
+
     render() {
         return (
             <div className="drag-and-drop">
@@ -158,7 +171,23 @@ class DragAndDrop extends React.Component {
                             </div>
                             <div className="percentage">
                                 {
-                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : 'DONE'
+                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : (
+                                        <div className="tick-icon--container">
+                                            <svg className={this.state.showTickIcon ? "draw" : ""} version="1.1" id="tick-icon" xmlns="http://www.w3.org/2000/svg"
+                                                 xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                 viewBox="0 0 37 37" style={{enableBackground: 'new 0 0 37 37'}}
+                                                 xmlSpace="preserve">
+                                                <path className="circ path" style={{fill: 'none', stroke: '#2EBF4F', strokeWidth: 3, strokeLinejoin: 'round', strokeMiterlimit: 10}}
+                                                      d="
+                                            M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"
+                                                />
+                                                <polyline className="tick path"
+                                                          style={{fill: 'none', stroke: '#2EBF4F', strokeWidth: 3, strokeMiterlimit: 15}}
+                                                          points="
+                                        11.6,20 15.9,24.2 26.4,13.8 "/>
+                                            </svg>
+                                        </div>
+                                    )
                                 }
                             </div>
                         </div>
