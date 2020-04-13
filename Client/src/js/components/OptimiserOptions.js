@@ -13,8 +13,8 @@ class OptimiserOptions extends React.Component {
         super();
 
         this.state = {
-            width: null,
-            height: null,
+            width: undefined,
+            height: undefined,
             quality: 100,
             showTickIcon: false,
         }

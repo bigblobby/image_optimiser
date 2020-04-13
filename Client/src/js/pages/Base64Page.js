@@ -33,7 +33,6 @@ class Base64Page extends React.Component {
     };
 
     render() {
-        console.log(this.props.images.length > 0 ? this.props.images[0].displayImage : 'Some tet');
         return (
             <div className="base64-page">
                 <div className="container-fluid max-width">

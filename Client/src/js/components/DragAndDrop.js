@@ -136,7 +136,7 @@ class DragAndDrop extends React.Component {
                         {
                             this.props.images.length > 0 &&  this.props.images.map(file => {
                                 return (
-                                    <div className="image-container" style={this.getImageStyles()} onClick={(e) => this.removeImage(e, file.id)}>
+                                    <div key={file.id} className="image-container" style={this.getImageStyles()} onClick={(e) => this.removeImage(e, file.id)}>
                                         <div className="overlay">
                                             <p>Remove</p>
                                         </div>
