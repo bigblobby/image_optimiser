@@ -4,6 +4,10 @@
         background-color: $gallery;
         height: 600px;
         cursor: pointer;
+
+        &.disable {
+            pointer-events: none;
+        }
     }
 }
 
@@ -12,6 +16,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 5;
         height: 100%;
         width: 100%;
         pointer-events: none;
@@ -19,6 +24,10 @@
 
         &.active {
             background-color: rgba($black, 0.15);
+        }
+
+        &.disable {
+            background-color: rgba($white, 0.85);
         }
     }
 }
@@ -112,39 +121,7 @@
 }
 
 .drag-and-drop {
-    .progress-bar--container {
-        display: flex;
-        align-items: center;
-        margin-top: 0.5rem;
 
-        .progress-bar {
-            position: relative;
-            flex-basis: 90%;
-
-            .track {
-                position: absolute;
-                height: 4px;
-                width: 100%;
-                background-color: $gallery;
-                border-radius: 5px;
-            }
-
-            .progress {
-                position: absolute;
-                height: 4px;
-                width: 0;
-                background-color: $chateau_green;
-                border-radius: 5px;
-                transition: width 0.1s linear;
-            }
-        }
-
-        .percentage {
-            flex-basis: 10%;
-            padding: 0 1rem;
-            text-align: center;
-        }
-    }
 }
 
 //.drag-and-drop {

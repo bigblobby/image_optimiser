@@ -22,16 +22,9 @@ class DragAndDrop extends React.Component {
 
         this.state = {
             dragging: false,
-            showTickIcon: false,
         };
 
         this.fileUploadRef = React.createRef();
-    }
-
-    componentDidUpdate(prevProps) {
-        if(prevProps.uploadComplete !== this.props.uploadComplete){
-            this.addSvgActiveClass();
-        }
     }
 
     handleDragEnter = (e) => {
@@ -91,6 +84,7 @@ class DragAndDrop extends React.Component {
 
     openFolder = () => {
         // This has to be done this way so that remove images can work. Otherwise just us a label htmlFor.
+        if(this.props.percentCompleted) return null;
         this.fileUploadRef.current.click();
     };
 
@@ -108,12 +102,6 @@ class DragAndDrop extends React.Component {
         }
     };
 
-    addSvgActiveClass = () => {
-        setTimeout(() => {
-            this.setState({ showTickIcon: true });
-        }, 0);
-    };
-
     render() {
         return (
             <div className="drag-and-drop">
@@ -126,7 +114,7 @@ class DragAndDrop extends React.Component {
                     onChange={this.handleManualUpload}
                 />
                 <div
-                    className="drag-and-drop--box"
+                    className={"drag-and-drop--box " + (this.props.percentCompleted ? 'disable' : '')}
                     onDragEnter={this.handleDragEnter}
                     onDragLeave={this.handleDragLeave}
                     onDrop={this.handleDrop}
@@ -143,7 +131,7 @@ class DragAndDrop extends React.Component {
                         )
                     }
 
-                    <div className={"drag-and-drop--overlay " + (this.state.dragging ? 'active' : '')}></div>
+                    <div className={"drag-and-drop--overlay " + (this.state.dragging ? 'active' : ' ') + (this.props.percentCompleted ? 'disable' : '')}></div>
                     <div className="drag-and-drop--inner">
                         {
                             this.props.images.length > 0 &&  this.props.images.map(file => {
@@ -162,37 +150,6 @@ class DragAndDrop extends React.Component {
                         }
                     </div>
                 </div>
-                {
-                    this.props.percentCompleted ? (
-                        <div className="progress-bar--container">
-                            <div className="progress-bar">
-                                <div className="track"></div>
-                                <div className="progress" style={{width: this.props.percentCompleted + '%'}}></div>
-                            </div>
-                            <div className="percentage">
-                                {
-                                    !this.props.uploadComplete ? this.props.percentCompleted + "%" : (
-                                        <div className="tick-icon--container">
-                                            <svg className={this.state.showTickIcon ? "draw" : ""} version="1.1" id="tick-icon" xmlns="http://www.w3.org/2000/svg"
-                                                 xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                 viewBox="0 0 37 37" style={{enableBackground: 'new 0 0 37 37'}}
-                                                 xmlSpace="preserve">
-                                                <path className="circ path" style={{fill: 'none', stroke: '#2EBF4F', strokeWidth: 3, strokeLinejoin: 'round', strokeMiterlimit: 10}}
-                                                      d="
-                                            M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"
-                                                />
-                                                <polyline className="tick path"
-                                                          style={{fill: 'none', stroke: '#2EBF4F', strokeWidth: 3, strokeMiterlimit: 15}}
-                                                          points="
-                                        11.6,20 15.9,24.2 26.4,13.8 "/>
-                                            </svg>
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        </div>
-                    ) : null
-                }
             </div>
         );
     }
