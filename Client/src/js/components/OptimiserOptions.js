@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    removeImage, resetOptimiser,
+    removeImage,
+    resetOptimiser,
     triggerUploadComplete,
-    updateDisplayAndUploadFiles, updateErrorMessage,
+    updateDisplayAndUploadFiles,
+    updateErrorMessage,
     updateProgress
 } from "../actions/imageOptimiserActions";
 import Api from "../api";
@@ -143,7 +145,12 @@ class OptimiserOptions extends React.Component {
                 <div>
                     {
                         !this.props.downloadImage && !this.props.downloadFilename && (
-                            <button className={"btn btn--green " + (this.props.uploading ? 'disabled' : '')} onClick={this.uploadFiles}>Upload</button>
+                            <div className={"button-container upload-button-container " + (this.state.uploading ? 'disabled' : '')}>
+                                <button className={"btn btn--green " + (this.props.uploading ? 'disabled' : '')} onClick={this.uploadFiles}>Upload</button>
+                                {
+                                    this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
+                                }
+                            </div>
                         )
                     }
 

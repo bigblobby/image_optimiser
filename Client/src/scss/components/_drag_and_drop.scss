@@ -2,7 +2,7 @@
     .drag-and-drop--box {
         position: relative;
         background-color: $gallery;
-        height: 500px;
+        height: 600px;
         cursor: pointer;
     }
 }
@@ -15,6 +15,7 @@
         height: 100%;
         width: 100%;
         pointer-events: none;
+        transition: background-color 0.2s ease;
 
         &.active {
             background-color: rgba($black, 0.15);
@@ -71,8 +72,8 @@
 
         .image-container {
             position: relative;
-            flex-basis: 33.33333%;
-            height: 25%;
+            //flex-basis: 33.33333%;
+            //height: 25%;
             padding: 0.5rem;
             cursor: pointer;
 
@@ -146,21 +147,21 @@
     }
 }
 
-.drag-and-drop {
-    .drag-and-drop--upload-button {
-        display: flex;
-        align-items: center;
-        margin-top: 1rem;
-
-        &.disabled {
-            cursor: not-allowed;
-        }
-
-        button {
-            &.disabled {
-                pointer-events: none;
-
-            }
-        }
-    }
-}
+//.drag-and-drop {
+//    .drag-and-drop--upload-button {
+//        display: flex;
+//        align-items: center;
+//        margin-top: 1rem;
+//
+//        &.disabled {
+//            cursor: not-allowed;
+//        }
+//
+//        button {
+//            &.disabled {
+//                pointer-events: none;
+//
+//            }
+//        }
+//    }
+//}

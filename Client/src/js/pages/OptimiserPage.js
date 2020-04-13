@@ -1,12 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import DragAndDrop from "../components/DragAndDrop";
 import OptimiserOptions from "../components/OptimiserOptions";
+import { resetOptimiser, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
+import DragAndDrop from "../components/DragAndDrop";
+import Helpers from "../helpers";
 
 class OptimiserPage extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    componentDidMount(){
+        this.props.resetOptimiser();
+    }
+
+    handleFiles = async(files) => {
+        const images = await Helpers.fileListBase64(files);
+        this.props.updateDisplayAndUploadFiles(images);
+    };
 
     render() {
         return (
@@ -16,7 +27,11 @@ class OptimiserPage extends React.Component {
                     <p className="heading-caption text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ea expedita maxime natus officiis, ratione repellat. Repellat rerum similique suscipit!</p>
                     <div className="optimiser-page--inner">
                         <div className="drag-and-drop--container">
-                            <DragAndDrop></DragAndDrop>
+                            <DragAndDrop
+                                handleFiles={this.handleFiles}
+                                text={"Drag and drop your files or click here"}
+                                helpText={"(up to 12 images)"}
+                            />
                         </div>
                         <div className="control-panel--container">
                             <OptimiserOptions />
@@ -28,4 +43,11 @@ class OptimiserPage extends React.Component {
     }
 }
 
-export default connect(null, null)(OptimiserPage);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateDisplayAndUploadFiles: (displayFiles, uploadFiles) => dispatch(updateDisplayAndUploadFiles(displayFiles, uploadFiles)),
+        resetOptimiser: () => dispatch(resetOptimiser())
+    }
+};
+
+export default connect(null, mapDispatchToProps)(OptimiserPage);

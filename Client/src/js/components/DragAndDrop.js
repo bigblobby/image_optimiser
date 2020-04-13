@@ -9,9 +9,14 @@ import {
     updateErrorMessage
 } from "../actions/imageOptimiserActions";
 
-const FILE_LIMIT = 12;
-
 class DragAndDrop extends React.Component {
+    static defaultProps = {
+        fileLimit: 12,
+        handleFiles: () => {},
+        text: "",
+        helpText: ""
+    };
+
     constructor(props) {
         super(props);
 
@@ -60,14 +65,12 @@ class DragAndDrop extends React.Component {
     };
 
     handleFiles = async(files) => {
-        if(this.props.images.length + files.length > FILE_LIMIT){
-            this.props.updateErrorMessage('You can only upload 12 images at a time');
+        if(this.props.images.length + files.length > this.props.fileLimit){
+            this.props.updateErrorMessage(`You can only upload ${this.props.fileLimit} image(s) at a time`);
             return;
         }
 
-        const images = await Helpers.fileListBase64(files);
-
-        this.props.updateDisplayAndUploadFiles(images);
+        this.props.handleFiles(files);
 
         this.setState({
             dragging: false,
@@ -82,6 +85,20 @@ class DragAndDrop extends React.Component {
     openFolder = () => {
         // This has to be done this way so that remove images can work. Otherwise just us a label htmlFor.
         this.fileUploadRef.current.click();
+    };
+
+    getImageStyles = () => {
+        if(this.props.fileLimit === 1){
+            return {
+                flexBasis: '100%',
+                height: '100%'
+            }
+        } else {
+            return {
+                flexBasis: '33.33333%',
+                height: '25%'
+            }
+        }
     };
 
     render() {
@@ -107,8 +124,8 @@ class DragAndDrop extends React.Component {
                         this.props.images.length === 0 && (
                             <div className={"drag-and-drop--info"}>
                                 <span className="icon-upload"></span>
-                                <h3>Drag and drop your files or click here</h3>
-                                <h4>(up to 12 images)</h4>
+                                <h3>{this.props.text}</h3>
+                                <h4>{this.props.helpText}</h4>
                             </div>
                         )
                     }
@@ -118,7 +135,7 @@ class DragAndDrop extends React.Component {
                         {
                             this.props.images.length > 0 &&  this.props.images.map(file => {
                                 return (
-                                    <div className="image-container" onClick={(e) => this.removeImage(e, file.id)}>
+                                    <div className="image-container" style={this.getImageStyles()} onClick={(e) => this.removeImage(e, file.id)}>
                                         <div className="overlay">
                                             <p>Remove</p>
                                         </div>

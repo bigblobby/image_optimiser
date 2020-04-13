@@ -5,11 +5,15 @@ label,
     margin-bottom: 0.5rem;
 }
 
-.label {
-    font-weight: 300;
+legend {
+    font-size: 18px;
 }
 
 .help-text {
     font-size: 13px;
     color: $silver_chalice;
+}
+
+.invalid-feedback {
+    color: $red;
 }

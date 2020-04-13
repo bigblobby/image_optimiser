@@ -7,9 +7,11 @@ async function uploadSingle(req, res){
     const {width, height, quality} = req.body;
 
     // TODO validate and sanitise
-    const filterWidth = width && width !== 0 ? Number(width) : null;
-    const filterHeight = height && height !== 0 ? Number(height) : null;
+    const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
+    const filterHeight = height && !isNaN(height) && height !== 0 ? Number(height) : null;
     const filterQuality = Number(quality);
+
+    //console.log(filterWidth, filterHeight, filterQuality);
 
     const settings = {
         filename: req.body,
@@ -32,9 +34,11 @@ async function uploadMultiple(req, res){
     const {width, height, quality} = req.body;
 
     // TODO validate and sanitise
-    const filterWidth = width && width !== 0 ? Number(width) : null;
-    const filterHeight = height && height !== 0 ? Number(height) : null;
+    const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
+    const filterHeight = height && !isNaN(height) && height !== 0 ? Number(height) : null;
     const filterQuality = Number(quality);
+
+    // console.log(filterWidth, filterHeight, filterQuality);
 
     images.forEach(image => {
         const settings = {

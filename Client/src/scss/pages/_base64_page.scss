@@ -1,0 +1,49 @@
+.base64-page {
+    margin-top: 3rem;
+
+    h1 {
+        //margin-bottom: 3rem;
+    }
+
+    .heading-caption {
+        max-width: 550px;
+        margin: 0 auto;
+    }
+}
+
+.base64-page {
+    .base64-page--inner {
+        display: flex;
+
+        .drag-and-drop--container {
+            max-width: 50%;
+            flex: 1 0 50%;
+            width: 100%;
+        }
+
+        .result--container {
+            display: flex;
+            flex-direction: column;
+            max-width: 50%;
+            flex: 1 0 50%;
+            width: 100%;
+            padding-left: 1rem;
+
+            textarea {
+                font-size: 14px;
+                height: 100%;
+                padding: 0.5rem;
+                color: $scorpion;
+            }
+
+            .button-container {
+                .reset {
+                    font-size: 14px;
+                    text-decoration: underline;
+                    color: $silver_chalice;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
