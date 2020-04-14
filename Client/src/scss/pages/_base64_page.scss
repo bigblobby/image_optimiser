@@ -37,6 +37,12 @@
             }
 
             .button-container {
+                display: flex;
+                align-items: center;
+
+                .btn {
+                    white-space: nowrap;
+                }
                 .reset {
                     font-size: 14px;
                     text-decoration: underline;

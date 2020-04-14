@@ -14,7 +14,8 @@ class DragAndDrop extends React.Component {
         fileLimit: 12,
         handleFiles: () => {},
         text: "",
-        helpText: ""
+        helpText: "",
+        acceptedFileTypes: ['image/png', 'image/jpeg', 'image/svg+xml']
     };
 
     constructor(props) {
@@ -49,8 +50,22 @@ class DragAndDrop extends React.Component {
         e.preventDefault();
         e.stopPropagation();
 
-        const files = e.dataTransfer.files;
-        this.handleFiles(files);
+        const files = Array.from(e.dataTransfer.files);
+        const allowedFiles = files.filter(file => this.props.acceptedFileTypes.includes(file.type));
+
+        if(files.length !== allowedFiles.length && allowedFiles.length === 0){
+            this.props.updateErrorMessage('Sorry! These files can\'t be accepted as they\'re the wrong type.');
+        } else if(files.length !== allowedFiles.length) {
+            this.props.updateErrorMessage('Sorry! Some of your files can\'t be accepted as they\'re the wrong type.');
+        } else {
+            this.props.updateErrorMessage(null)
+        }
+
+        if(this.state.dragging){
+            this.setState({dragging: false})
+        }
+
+        this.handleFiles(allowedFiles);
     };
 
     handleDragOver = (e) => {
@@ -66,7 +81,7 @@ class DragAndDrop extends React.Component {
 
     handleFiles = async(files) => {
         if(this.props.images.length + files.length > this.props.fileLimit){
-            this.props.updateErrorMessage(`You can only upload ${this.props.fileLimit} image(s) at a time`);
+            this.props.updateErrorMessage(`You can only upload ${this.props.fileLimit} image(s) at a time.`);
             return;
         }
 
@@ -117,7 +132,7 @@ class DragAndDrop extends React.Component {
                     className="d-none"
                     ref={this.fileUploadRef}
                     type="file"
-                    accept="image/png, image/jpeg"
+                    accept={this.props.acceptedFileTypes.join(', ')}
                     multiple
                     onChange={this.handleManualUpload}
                 />
