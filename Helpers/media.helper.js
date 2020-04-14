@@ -37,7 +37,7 @@ async function processImage(settings = {
 }
 
 function filterWithFile(filepath, settings) {
-    const {filename, fileType, height, width, quality} = settings;
+    const {filename, fileType, height, width, quality, fit, position} = settings;
     const outputLocation = `./uploads/filter/${ filename }`;
     const checkedLocation = path.join(__dirname, `../uploads/filter/${ filename}`);
 
@@ -49,7 +49,9 @@ function filterWithFile(filepath, settings) {
                 sharp(filepath)
                     .resize({
                         height: height,
-                        width: width
+                        width: width,
+                        fit: fit,
+                        position: position
                     })
                     [fileType]({ quality: quality })
                     .toFile(outputLocation)
@@ -79,7 +81,9 @@ function filterWithBuffer(settings){
         sharp(imgBuffer)
             .resize({
                 height: settings.height,
-                width: settings.width
+                width: settings.width,
+                fit: settings.fit,
+                position: settings.position
             })
             [fileType]({ quality: settings.quality })
             .toBuffer()

@@ -102,6 +102,14 @@ class DragAndDrop extends React.Component {
         }
     };
 
+    getFilesize = (filesize) => {
+        if(filesize < 1000000){
+            return ((filesize / 1000).toFixed(2)) + ' KB';
+        } else {
+            return ((filesize / 1000000).toFixed(2)) + ' MB';
+        }
+    };
+
     render() {
         return (
             <div className="drag-and-drop">
@@ -143,7 +151,10 @@ class DragAndDrop extends React.Component {
                                         <div
                                             className="image"
                                             style={{backgroundImage: `url(${file.displayImage})`}}
-                                        ></div>
+                                        >
+                                            <div className="image-filesize">{this.getFilesize(file.uploadImage.size)}</div>
+                                            <div className="image-dimensions">{file.width} x {file.height}</div>
+                                        </div>
                                     </div>
                                 )
                             })

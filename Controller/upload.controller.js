@@ -4,12 +4,14 @@ const fs = require('fs');
 const path =require('path');
 
 async function uploadSingle(req, res){
-    const {width, height, quality} = req.body;
+    const {width, height, quality, fitment, position} = req.body;
 
     // TODO validate and sanitise
     const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
     const filterHeight = height && !isNaN(height) && height !== 0 ? Number(height) : null;
     const filterQuality = Number(quality);
+    const filterFitment = fitment;
+    const filterPosition = position;
 
     //console.log(filterWidth, filterHeight, filterQuality);
 
@@ -17,7 +19,9 @@ async function uploadSingle(req, res){
         filename: req.body,
         height: filterHeight,
         width: filterWidth,
-        quality: filterQuality
+        quality: filterQuality,
+        fit: filterFitment,
+        position: filterPosition
     };
 
     const filteredImage = await MediaHelper.processImage(settings, 'buffer');
@@ -31,12 +35,14 @@ async function uploadSingle(req, res){
 async function uploadMultiple(req, res){
     const images = req.files;
     const imagePromises = [];
-    const {width, height, quality} = req.body;
+    const {width, height, quality, fitment, position} = req.body;
 
     // TODO validate and sanitise
     const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
     const filterHeight = height && !isNaN(height) && height !== 0 ? Number(height) : null;
     const filterQuality = Number(quality);
+    const filterFitment = fitment;
+    const filterPosition = position;
 
     // console.log(filterWidth, filterHeight, filterQuality);
 
@@ -46,7 +52,9 @@ async function uploadMultiple(req, res){
             mimetype: image.mimetype,
             height: filterHeight,
             width: filterWidth,
-            quality: filterQuality
+            quality: filterQuality,
+            fit: filterFitment,
+            position: filterPosition
         };
 
         imagePromises.push(MediaHelper.processImage(settings, 'file'));

@@ -9,12 +9,22 @@ class Helpers {
                 reader.readAsDataURL(file);
 
                 reader.addEventListener('load', (e) => {
-                    const newFile = {
-                        id: nanoid(),
-                        displayImage: e.target.result,
-                        uploadImage: file
-                    };
-                    resolve(newFile)
+                    var image = new Image();
+
+                    //Set the Base64 string return from FileReader as source.
+                    image.src = e.target.result;
+
+                    image.onload = function(){
+                        const newFile = {
+                            id: nanoid(),
+                            displayImage: e.target.result,
+                            uploadImage: file,
+                            width: this.width,
+                            height: this.height
+                        };
+
+                        resolve(newFile)
+                    }
                 });
             })
         }

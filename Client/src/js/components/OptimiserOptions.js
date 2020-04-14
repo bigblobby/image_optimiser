@@ -16,6 +16,8 @@ class OptimiserOptions extends React.Component {
             width: undefined,
             height: undefined,
             quality: 100,
+            fitment: 'cover',
+            position: 'center',
             showTickIcon: false,
         }
     }
@@ -56,6 +58,8 @@ class OptimiserOptions extends React.Component {
             formData.append('width', this.state.width);
             formData.append('height', this.state.height);
             formData.append('quality', this.state.quality);
+            formData.append('fitment', this.state.fitment);
+            formData.append('position', this.state.position);
 
             Api.uploadMultipleImages(formData, config)
                 .then(result => {
@@ -69,6 +73,8 @@ class OptimiserOptions extends React.Component {
                 width: this.state.width,
                 height: this.state.height,
                 quality: this.state.quality,
+                fitment: this.state.fitment,
+                position: this.state.position
             }, config)
                 .then(result => {
                     this.props.triggerUploadComplete(result);
@@ -201,19 +207,39 @@ class OptimiserOptions extends React.Component {
                         </div>
                     </fieldset>
                     <div className="form-group">
-                        <div className="form-row">
-                            <div className="col-6">
-                                <label htmlFor="options_quality">Quality <span className="help-text">(0 - 100)</span></label>
-                                <input
-                                    className="form-control"
-                                    type="text"
-                                    id="options_quality"
-                                    name="quality"
-                                    value={this.state.quality}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
+                        <label htmlFor="options_quality">Quality <span className="help-text">(0 - 100)</span></label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="options_quality"
+                            name="quality"
+                            value={this.state.quality}
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="options_fitment">Fitment</label>
+                        <select className="form-control" name="fitment" id="options_fitment" value={this.state.fitment} onChange={this.handleChange}>
+                            <option value="cover">Cover (default)</option>
+                            <option value="contain">Contain</option>
+                            <option value="fill">Fill</option>
+                            <option value="inside">Inside</option>
+                            <option value="outside">Outside</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="options_position">Position</label>
+                        <select className="form-control" name="position" id="options_position" value={this.state.position} onChange={this.handleChange}>
+                            <option value="center">Center (default)</option>
+                            <option value="top">Top</option>
+                            <option value="top right">Top right</option>
+                            <option value="right">Right</option>
+                            <option value="right bottom">Bottom right</option>
+                            <option value="bottom">Bottom</option>
+                            <option value="left bottom">Bottom left</option>
+                            <option value="left">Left</option>
+                            <option value="left top">Top left</option>
+                        </select>
                     </div>
                 </div>
 
