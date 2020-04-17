@@ -38,7 +38,7 @@ class OptimiserOptions extends React.Component {
         const self = this;
 
         if(!this.props.images.length){
-            this.props.updateErrorMessage('Please select files to upload');
+            this.props.updateErrorMessage('Please select files to upload.');
             return;
         }
 
@@ -255,9 +255,6 @@ class OptimiserOptions extends React.Component {
                         )
                     }
                 </div>
-
-
-
             </div>
         )
     }
