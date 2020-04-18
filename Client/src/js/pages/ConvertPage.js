@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DragAndDrop from "../components/DragAndDrop";
 import { resetOptimiser, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
 import Helpers from "../helpers";
+import ConvertOptions from "../components/ConvertOptions";
 
 class ConvertPage extends React.Component {
     constructor(props) {
@@ -33,6 +34,9 @@ class ConvertPage extends React.Component {
                                 helpText={"(1 image only)"}
                                 acceptedFileTypes={['image/png', 'image/jpeg', 'image/svg+xml']}
                             />
+                        </div>
+                        <div className="control-panel--container">
+                            <ConvertOptions />
                         </div>
                     </div>
                 </div>

@@ -5,4 +5,20 @@
         max-width: 550px;
         margin: 0 auto;
     }
+
+    .convert-page--inner {
+        display: flex;
+
+        .drag-and-drop--container {
+            max-width: 50%;
+            flex: 1 0 50%;
+            width: 100%;
+        }
+
+        .control-panel--container {
+            max-width: 50%;
+            flex: 1 0 50%;
+            width: 100%;
+        }
+    }
 }

@@ -9,20 +9,21 @@ class Helpers {
                 reader.readAsDataURL(file);
 
                 reader.addEventListener('load', (e) => {
+                    // Create an image to retrieve the width and height only, the image is not used.
                     const image = new Image();
                     image.src = e.target.result;
 
-                    image.onload = function(){
+                    image.addEventListener('load', (loadImageEvent) => {
                         const newFile = {
                             id: nanoid(),
                             displayImage: e.target.result,
                             uploadImage: file,
-                            width: this.width,
-                            height: this.height
+                            width: loadImageEvent.path[0].width,
+                            height: loadImageEvent.path[0].height
                         };
 
                         resolve(newFile);
-                    }
+                    });
                 });
             })
         }
