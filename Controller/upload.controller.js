@@ -4,7 +4,7 @@ const fs = require('fs');
 const path =require('path');
 
 async function uploadSingle(req, res){
-    const {width, height, quality, fitment, position} = req.body;
+    const {image, width, height, quality, fitment, position} = req.body;
 
     // TODO validate and sanitise
     const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
@@ -16,7 +16,7 @@ async function uploadSingle(req, res){
     //console.log(filterWidth, filterHeight, filterQuality);
 
     const settings = {
-        filename: req.body,
+        image: image,
         height: filterHeight,
         width: filterWidth,
         quality: filterQuality,
@@ -34,7 +34,6 @@ async function uploadSingle(req, res){
 
 async function uploadMultiple(req, res){
     const images = req.files;
-    const imagePromises = [];
     const {width, height, quality, fitment, position} = req.body;
 
     // TODO validate and sanitise
@@ -44,8 +43,7 @@ async function uploadMultiple(req, res){
     const filterFitment = fitment;
     const filterPosition = position;
 
-    // console.log(filterWidth, filterHeight, filterQuality);
-
+    const imagePromises = [];
     images.forEach(image => {
         const settings = {
             filename: image.filename,

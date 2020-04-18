@@ -29,6 +29,23 @@ class Base64Page extends React.Component {
         console.log('copied to clipboard')
     };
 
+    // onDrop = () => {
+    //     this.setState({
+    //         loading: true
+    //     }, () => {
+    //         console.log(this.textarea.current);
+    //         // console.log(this.props.images[0].displayImage);
+    //         setTimeout(() => {
+    //             this.textarea.current.value = this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.'
+    //
+    //         },0);
+    //     });
+    // }
+
+    output = () => {
+        return this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.';
+    }
+
     render() {
         return (
             <div className="base64-page">
@@ -43,10 +60,11 @@ class Base64Page extends React.Component {
                                 text={"Drag and drop your image or click here"}
                                 helpText={"(1 image only)"}
                                 acceptedFileTypes={['image/png', 'image/jpeg', 'image/svg+xml']}
+                                onDropCallback={this.onDrop}
                             />
                         </div>
                         <div className="result--container">
-                            <textarea readOnly ref={this.textarea} value={this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.'} />
+                            <textarea readOnly ref={this.textarea} value={this.output()}/>
                             <div className="button-container mt-3">
                                 <button className="btn btn--blue" onClick={this.copyToClipboard}>Copy to clipboard</button>
                                 {

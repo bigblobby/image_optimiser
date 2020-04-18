@@ -13,6 +13,7 @@ class DragAndDrop extends React.Component {
     static defaultProps = {
         fileLimit: 12,
         handleFiles: () => {},
+        onDropCallback: () => {},
         text: "",
         helpText: "",
         acceptedFileTypes: ['image/png', 'image/jpeg', 'image/svg+xml']
@@ -59,6 +60,10 @@ class DragAndDrop extends React.Component {
             this.props.updateErrorMessage('Sorry! Some of your files can\'t be accepted as they\'re the wrong type.');
         } else {
             this.props.updateErrorMessage(null)
+
+            if(this.props.onDropCallback){
+                this.props.onDropCallback();
+            }
         }
 
         if(this.state.dragging){

@@ -9,9 +9,7 @@ class Helpers {
                 reader.readAsDataURL(file);
 
                 reader.addEventListener('load', (e) => {
-                    var image = new Image();
-
-                    //Set the Base64 string return from FileReader as source.
+                    const image = new Image();
                     image.src = e.target.result;
 
                     image.onload = function(){
@@ -23,7 +21,7 @@ class Helpers {
                             height: this.height
                         };
 
-                        resolve(newFile)
+                        resolve(newFile);
                     }
                 });
             })
