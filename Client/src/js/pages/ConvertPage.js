@@ -24,14 +24,14 @@ class ConvertPage extends React.Component {
             <div className="convert-page">
                 <div className="container-fluid max-width">
                     <h1 className="text-center">Convert images</h1>
-                    <p className="heading-caption text-center mb-5">Blah blah blah</p>
+                    <p className="heading-caption text-center mb-5">Convert your images to PNG, JPG and WEBP.</p>
                     <div className="convert-page--inner">
                         <div className="drag-and-drop--container">
                             <DragAndDrop
                                 fileLimit={12}
                                 handleFiles={this.handleFiles}
-                                text={"Drag and drop your image or click here"}
-                                helpText={"(1 image only)"}
+                                text={"Drag and drop your images or click here"}
+                                helpText={"(up to 12 images)"}
                                 acceptedFileTypes={['image/png', 'image/jpeg', 'image/svg+xml']}
                             />
                         </div>

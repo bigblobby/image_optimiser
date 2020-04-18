@@ -30,7 +30,7 @@ class OptimiserPage extends React.Component {
                             <DragAndDrop
                                 fileLimit={12}
                                 handleFiles={this.handleFiles}
-                                text={"Drag and drop your files or click here"}
+                                text={"Drag and drop your images or click here"}
                                 helpText={"(up to 12 images)"}
                                 acceptedFileTypes={['image/png', 'image/jpeg']}
                             />
