@@ -4,6 +4,7 @@ import OptimiserOptions from "../components/OptimiserOptions";
 import { resetOptimiser, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
 import DragAndDrop from "../components/DragAndDrop";
 import Helpers from "../helpers";
+import { Helmet } from "react-helmet";
 
 class OptimiserPage extends React.Component {
     constructor(props) {
@@ -21,26 +22,32 @@ class OptimiserPage extends React.Component {
 
     render() {
         return (
-            <div className="optimiser-page">
-                <div className="container-fluid max-width">
-                    <h1 className="text-center ">Image optimiser</h1>
-                    <p className="heading-caption text-center mb-5">Resize and optimise. At the moment we only accept PNG and JPEG/JPG files.</p>
-                    <div className="optimiser-page--inner">
-                        <div className="drag-and-drop--container">
-                            <DragAndDrop
-                                fileLimit={12}
-                                handleFiles={this.handleFiles}
-                                text={"Drag and drop your images or click here"}
-                                helpText={"(up to 12 images)"}
-                                acceptedFileTypes={['image/png', 'image/jpeg']}
-                            />
-                        </div>
-                        <div className="control-panel--container">
-                            <OptimiserOptions />
+            <>
+                <Helmet>
+                    <title>Fishy images | Optimise</title>
+                </Helmet>
+
+                <div className="optimiser-page">
+                    <div className="container-fluid max-width">
+                        <h1 className="text-center ">Image optimiser</h1>
+                        <p className="heading-caption text-center mb-5">Resize and optimise. At the moment we only accept PNG and JPEG/JPG files.</p>
+                        <div className="optimiser-page--inner">
+                            <div className="drag-and-drop--container">
+                                <DragAndDrop
+                                    fileLimit={12}
+                                    handleFiles={this.handleFiles}
+                                    text={"Drag and drop your images or click here"}
+                                    helpText={"(up to 12 images)"}
+                                    acceptedFileTypes={['image/png', 'image/jpeg']}
+                                />
+                            </div>
+                            <div className="control-panel--container">
+                                <OptimiserOptions />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }
