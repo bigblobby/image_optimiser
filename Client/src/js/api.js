@@ -53,7 +53,7 @@ class Api {
     }
 
     convertImage(params = {}){
-        const url = '/api/image/convert';
+        const url = '/api/image/convert/single';
         return this.post(url, params);
     }
 }

@@ -98,6 +98,29 @@ function filterWithBuffer(settings){
     })
 }
 
+function convertImage(settings){
+    const {image, newType} = settings;
+    const parts = image.split(';');
+    const imageData = parts[1].split(',')[1];
+    const newMimeType = `image/${newType}`;
+    const imgBuffer = Buffer.from(imageData, 'base64');
+
+    return new Promise((resolve, reject) => {
+        sharp(imgBuffer)
+            [newType]({ quality: 100 })
+            .toBuffer()
+            .then(data => {
+                const base64image = `data:${newMimeType};base64,${data.toString('base64')}`;
+                resolve(base64image);
+            })
+            .catch(err => {
+                console.log(err);
+                reject(err);
+            });
+    })
+}
+
 module.exports = {
-    processImage: processImage
+    processImage: processImage,
+    convertImage: convertImage
 };

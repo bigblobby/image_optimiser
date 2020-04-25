@@ -1,12 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Api from '../api';
+import {
+    resetOptimiser,
+    triggerUploadComplete,
+    updateErrorMessage,
+    updateProgress
+} from "../actions/imageOptimiserActions";
 
 class ConvertOptions extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            outputFiletype: "png"
+            outputFiletype: 'png'
         }
     }
 
@@ -16,7 +23,19 @@ class ConvertOptions extends React.Component {
         });
     }
 
-    uploadFiles = () => {};
+    uploadFiles = () => {
+        if(this.props.images.length === 1){
+            Api.convertImage({
+                image: this.props.images[0].displayImage,
+                newType: this.state.outputFiletype
+            }).then(result => {
+                console.log(result);
+                this.props.triggerUploadComplete(result);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    };
 
     render(){
         return (
@@ -39,4 +58,26 @@ class ConvertOptions extends React.Component {
     }
 }
 
-export default connect(null, null)(ConvertOptions);
+const mapStateToProps = ({imageOptimiser}) => {
+    const {images, uploading, uploadComplete, downloadFilename, downloadImage, percentCompleted, error} = imageOptimiser;
+    return {
+        images,
+        uploading,
+        downloadFilename,
+        downloadImage,
+        error,
+        uploadComplete,
+        percentCompleted
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        triggerUploadComplete: (data) => dispatch(triggerUploadComplete(data)),
+        updateProgress: (percent) => dispatch(updateProgress(percent)),
+        updateErrorMessage: (message) => dispatch(updateErrorMessage(message)),
+        resetOptimiser: () => dispatch(resetOptimiser())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConvertOptions);
