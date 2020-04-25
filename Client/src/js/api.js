@@ -51,6 +51,11 @@ class Api {
             })
         });
     }
+
+    convertImage(params = {}){
+        const url = '/api/image/convert';
+        return this.post(url, params);
+    }
 }
 
 export default new Api();

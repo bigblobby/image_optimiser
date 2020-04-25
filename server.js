@@ -13,6 +13,8 @@ app.disable('X-Powered-By');
 
 // Apps/Routers
 const UploadRouter = require('./Router/upload.router');
+const DownloadRouter = require('./Router/download.router');
+const ConvertRouter = require('./Router/convert.router');
 
 // Middleware
 app.use(express.static(path.join(__dirname, './client/build')));
@@ -21,7 +23,9 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
 // Routes
-app.use('/api/image', UploadRouter);
+app.use('/api/image/upload', UploadRouter);
+app.use('/api/image/download', DownloadRouter);
+app.use('/api/image/convert', ConvertRouter);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
