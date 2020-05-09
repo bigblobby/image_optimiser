@@ -1,16 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-Client/node_modules
-Client/.pnp
-Client/.pnp.js
-node_modules
+client/node_modules
+client/.pnp
+client/.pnp.js
+backend/node_modules
 
 # testing
-Client/coverage
+client/coverage
 
 # production
-Client/build
+client/build
 
 # misc
 .DS_Store
@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea/*
-uploads
+backend/uploads

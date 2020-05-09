@@ -1,0 +1,38 @@
+version: '3.6'
+
+services:
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        volumes:
+            - './backend:/usr/src/app'
+            - '/usr/src/app/node_modules'
+        environment:
+            - NODE_ENV=development
+            - CHOKIDAR_USEPOLLING=true
+
+
+    client:
+        stdin_open: true
+        build:
+            context: ./client
+            dockerfile: Dockerfile
+        volumes:
+            - './client:/usr/src/app'
+            - '/usr/src/app/node_modules'
+        environment:
+            - NODE_ENV=development
+        depends_on:
+            - backend
+
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: Dockerfile
+        restart: always
+        ports:
+            - 80:80
+        depends_on:
+            - backend
+            - client

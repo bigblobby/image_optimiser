@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+    backend-prod:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile-prod
+        volumes:
+            - './backend:/usr/src/app'
+            - '/usr/src/app/node_modules'
+        environment:
+            - NODE_ENV=production
+    #    depends_on:
+    #     - db-service
+
+    client-prod:
+        build:
+            context: ./client
+            dockerfile: Dockerfile-prod
+        environment:
+            - NODE_ENV=production
+        depends_on:
+            - backend-prod
+        ports:
+            - "80:80"
