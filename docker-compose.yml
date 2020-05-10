@@ -13,13 +13,13 @@ services:
             - CHOKIDAR_USEPOLLING=true
 
 
-    client:
+    frontend:
         stdin_open: true
         build:
-            context: ./client
+            context: ./frontend
             dockerfile: Dockerfile
         volumes:
-            - './client:/usr/src/app'
+            - './frontend:/usr/src/app'
             - '/usr/src/app/node_modules'
         environment:
             - NODE_ENV=development
@@ -35,4 +35,4 @@ services:
             - 80:80
         depends_on:
             - backend
-            - client
+            - frontend

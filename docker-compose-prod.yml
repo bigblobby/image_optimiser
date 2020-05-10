@@ -13,9 +13,9 @@ services:
     #    depends_on:
     #     - db-service
 
-    client-prod:
+    frontend-prod:
         build:
-            context: ./client
+            context: ./frontend
             dockerfile: Dockerfile-prod
         environment:
             - NODE_ENV=production
