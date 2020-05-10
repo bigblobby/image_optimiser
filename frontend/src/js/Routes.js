@@ -38,7 +38,7 @@ export default class Routes extends React.Component {
                                 <div className="header--inner">
                                     <div className="logo-container">
                                         <Link className="logo" to={'/'}>
-                                            <img src="fish.png" alt="Logo"/>
+                                            <img src="/images/fish.svg" alt="Logo"/>
                                         </Link>
                                     </div>
                                     <nav className="navigation">
