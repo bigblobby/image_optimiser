@@ -5,6 +5,10 @@ a {
         color: darken($mineshaft, 15);
         text-decoration: none;
     }
+
+    &.link--red {
+        color: $red;
+    }
 }
 
 .btn {

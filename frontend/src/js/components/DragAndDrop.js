@@ -82,6 +82,8 @@ class DragAndDrop extends React.Component {
     handleManualUpload = async (e) => {
         const files = e.target.files;
         this.handleFiles(files);
+
+        e.currentTarget.value = '';
     };
 
     handleFiles = async(files) => {
