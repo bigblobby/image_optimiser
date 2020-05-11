@@ -52,9 +52,14 @@ class Api {
         });
     }
 
-    convertImage(params = {}){
+    convertImage(params = {}, config){
         const url = '/api/image/convert/single';
-        return this.post(url, params);
+        return this.post(url, params, config);
+    }
+
+    convertMultipleImages(params = {}, config){
+        const url = '/api/image/convert/multiple';
+        return this.post(url, params, config);
     }
 }
 

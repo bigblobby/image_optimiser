@@ -30,7 +30,7 @@ async function processImage(settings = {
     if(preset === 'buffer'){
         return filterWithBuffer(settings);
     } else if(preset === 'file') {
-        settings.fileType = settings.mimetype.split('/')[1];
+        settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
         const filepath = 'uploads/' + settings.filename;
         return filterWithFile(filepath, settings);
     }

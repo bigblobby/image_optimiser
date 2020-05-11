@@ -1,7 +1,5 @@
 const MediaHelper = require('../Helpers/media.helper');
 const ZipHelper = require('../Helpers/zip.helper');
-const fs = require('fs');
-const path =require('path');
 
 async function uploadSingle(req, res){
     const {image, width, height, quality, fitment, position} = req.body;

@@ -33,10 +33,10 @@ class ConvertPage extends React.Component {
                         <div className="convert-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
-                                    fileLimit={12}
+                                    fileLimit={1}
                                     handleFiles={this.handleFiles}
-                                    text={"Drag and drop your images or click here"}
-                                    helpText={"(up to 12 images)"}
+                                    text={"Drag and drop your image or click here"}
+                                    helpText={"(1 image only)"}
                                     acceptedFileTypes={['image/png', 'image/jpeg', 'image/svg+xml']}
                                 />
                             </div>

@@ -70,8 +70,6 @@ class OptimiserOptions extends React.Component {
             Api.uploadMultipleImages(formData, config)
                 .then(result => {
                     this.props.triggerUploadComplete(result);
-                }).catch(err => {
-                    console.log(err);
                 });
         } else {
             Api.uploadSingleImage({
@@ -81,11 +79,8 @@ class OptimiserOptions extends React.Component {
                 quality: quality,
                 fitment: this.state.fitment,
                 position: this.state.position
-            }, config)
-                .then(result => {
-                    this.props.triggerUploadComplete(result);
-                }).catch(err => {
-                console.log(err);
+            }, config).then(result => {
+                this.props.triggerUploadComplete(result);
             });
         }
     };
@@ -114,7 +109,7 @@ class OptimiserOptions extends React.Component {
             <div className="optimiser-options--container">
                 {
                     this.props.percentCompleted ? (
-                        <div className="overlay">
+                        <div className="upload-overlay overlay">
                             <div className="progress-bar--container mb-3">
                                 <div className="progress-bar">
                                     <div className="track"></div>
