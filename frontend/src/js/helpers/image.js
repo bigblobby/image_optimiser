@@ -14,12 +14,15 @@ class ImageHelper {
                     image.src = e.target.result;
 
                     image.addEventListener('load', (loadImageEvent) => {
+                        // Fixes a bug in firefox
+                        const path = loadImageEvent.path || (loadImageEvent.composedPath && loadImageEvent.composedPath());
+
                         const newFile = {
                             id: nanoid(),
                             displayImage: e.target.result,
                             uploadImage: file,
-                            width: loadImageEvent.path[0].width,
-                            height: loadImageEvent.path[0].height
+                            width: path[0].width,
+                            height: path[0].height
                         };
 
                         resolve(newFile);
