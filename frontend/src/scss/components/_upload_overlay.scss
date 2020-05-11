@@ -14,31 +14,3 @@
         padding: 1rem;
     }
 }
-
-.upload-overlay {
-    .button-container {
-        &.upload-button-container {
-            display: flex;
-            align-items: center;
-            margin-top: 1rem;
-
-            &.disabled {
-                cursor: not-allowed;
-            }
-
-            button {
-                &.disabled {
-                    pointer-events: none;
-
-                }
-            }
-        }
-
-        .reset {
-            font-size: 14px;
-            text-decoration: underline;
-            color: $silver_chalice;
-            cursor: pointer;
-        }
-    }
-}

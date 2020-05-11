@@ -33,6 +33,11 @@ class ConvertOptions extends React.Component {
     uploadFiles = () => {
         const self = this;
 
+        if(!this.props.images.length){
+            this.props.updateErrorMessage('Please select a file to upload.');
+            return;
+        }
+
         const config = {
             onUploadProgress: function(progressEvent) {
                 const percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
@@ -139,6 +144,9 @@ class ConvertOptions extends React.Component {
                 </div>
                 <div className={"button-container upload-button-container "}>
                     <button className={"btn btn--green "} onClick={this.uploadFiles}>Convert</button>
+                    {
+                        this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
+                    }
                 </div>
             </div>
         )

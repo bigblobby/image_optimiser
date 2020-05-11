@@ -2,6 +2,7 @@ version: '3.6'
 
 services:
     backend-prod:
+        restart: always
         build:
             context: ./backend
             dockerfile: Dockerfile-prod
@@ -14,6 +15,7 @@ services:
     #     - db-service
 
     frontend-prod:
+        restart: always
         build:
             context: ./frontend
             dockerfile: Dockerfile-prod

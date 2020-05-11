@@ -15,15 +15,30 @@ a {
     &.btn--blue {
         background-color: $bayofmany;
         color: $white;
+
+        &:hover {
+            background-color: darken($bayofmany, 10);
+            color: $white;
+        }
     }
 
     &.btn--green {
         background-color: $chateau_green;
         color: $white;
+
+        &:hover {
+            background-color: darken($chateau_green, 10);
+            color: $white;
+        }
     }
 
     &.btn--red {
         background-color: $red;
         color: $white;
+
+        &:hover {
+            background-color: darken($red, 10);
+            color: $white;
+        }
     }
 }
