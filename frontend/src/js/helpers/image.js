@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 
-class Helpers {
+class ImageHelper {
 
     fileListBase64(fileList){
         function getBase64(file) {
@@ -36,9 +36,8 @@ class Helpers {
 
         return Promise.all(promises)
     }
-
 }
 
-export default new Helpers();
+export default new ImageHelper();
 
 

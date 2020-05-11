@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DragAndDrop from "../components/DragAndDrop";
 import { resetOptimiser, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
-import Helpers from "../helpers";
+import ImageHelper from "../helpers/image";
 import ConvertOptions from "../components/ConvertOptions";
 import {Helmet} from "react-helmet";
 
@@ -16,7 +16,7 @@ class ConvertPage extends React.Component {
     }
 
     handleFiles = async (files) => {
-        const images = await Helpers.fileListBase64(files);
+        const images = await ImageHelper.fileListBase64(files);
         this.props.updateDisplayAndUploadFiles(images);
     };
 

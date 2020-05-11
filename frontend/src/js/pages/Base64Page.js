@@ -5,7 +5,7 @@ import {
     updateDisplayAndUploadFiles,
 } from "../actions/imageOptimiserActions";
 import DragAndDrop from "../components/DragAndDrop";
-import Helpers from "../helpers";
+import ImageHelper from "../helpers/image";
 import { Helmet } from "react-helmet";
 
 class Base64Page extends React.Component {
@@ -20,7 +20,7 @@ class Base64Page extends React.Component {
     }
 
     handleFiles = async(files) => {
-        const images = await Helpers.fileListBase64(files);
+        const images = await ImageHelper.fileListBase64(files);
         this.props.updateDisplayAndUploadFiles(images);
     };
 

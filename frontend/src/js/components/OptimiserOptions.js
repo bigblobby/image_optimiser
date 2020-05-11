@@ -6,6 +6,8 @@ import {
     updateErrorMessage,
     updateProgress
 } from "../actions/imageOptimiserActions";
+import ImageHelper from "../helpers/image";
+import ValidationHelper from "../helpers/validation";
 import Api from "../api";
 
 class OptimiserOptions extends React.Component {
@@ -13,8 +15,8 @@ class OptimiserOptions extends React.Component {
         super();
 
         this.state = {
-            width: undefined,
-            height: undefined,
+            width: '',
+            height: '',
             quality: 100,
             fitment: 'cover',
             position: 'center',
@@ -49,15 +51,19 @@ class OptimiserOptions extends React.Component {
             }
         };
 
+        const width = ValidationHelper.validateWidthHeight(this.state.width);
+        const height = ValidationHelper.validateWidthHeight(this.state.height);
+        const quality = ValidationHelper.validateQuality(this.state.quality);
+
         if(this.props.images.length > 1){
             const formData = new FormData();
             for(let file of this.props.images){
                 formData.append('images', file.uploadImage);
             }
 
-            formData.append('width', this.state.width);
-            formData.append('height', this.state.height);
-            formData.append('quality', this.state.quality);
+            formData.append('width', width);
+            formData.append('height', height);
+            formData.append('quality', quality);
             formData.append('fitment', this.state.fitment);
             formData.append('position', this.state.position);
 
@@ -65,14 +71,14 @@ class OptimiserOptions extends React.Component {
                 .then(result => {
                     this.props.triggerUploadComplete(result);
                 }).catch(err => {
-                console.log(err);
-            });
+                    console.log(err);
+                });
         } else {
             Api.uploadSingleImage({
                 image: this.props.images[0].displayImage,
-                width: this.state.width,
-                height: this.state.height,
-                quality: this.state.quality,
+                width: width,
+                height: height,
+                quality: quality,
                 fitment: this.state.fitment,
                 position: this.state.position
             }, config)
@@ -210,7 +216,9 @@ class OptimiserOptions extends React.Component {
                         <label htmlFor="options_quality">Quality <span className="help-text">(0 - 100)</span></label>
                         <input
                             className="form-control"
-                            type="text"
+                            type="number"
+                            min="0"
+                            max="100"
                             id="options_quality"
                             name="quality"
                             value={this.state.quality}
