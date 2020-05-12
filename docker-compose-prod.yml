@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
     backend-prod:
-        restart: always
+        restart: unless-stopped
         build:
             context: ./backend
             dockerfile: Dockerfile-prod
@@ -11,11 +11,9 @@ services:
             - '/usr/src/app/node_modules'
         environment:
             - NODE_ENV=production
-    #    depends_on:
-    #     - db-service
 
     frontend-prod:
-        restart: always
+        restart: unless-stopped
         build:
             context: ./frontend
             dockerfile: Dockerfile-prod
