@@ -1,6 +1,6 @@
 import React from 'react';
 import thunk from 'redux-thunk';
-import { Route, Switch, NavLink, Link } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 import Homepage from "./pages/Homepage";
@@ -13,6 +13,7 @@ import history from "./history";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
+import Navigation from "./components/Navigation";
 
 const middleware = [
     thunk,
@@ -42,13 +43,7 @@ export default class Routes extends React.Component {
                                             <img src="/images/fish.svg" alt="Logo"/>
                                         </Link>
                                     </div>
-                                    <nav className="navigation">
-                                        <ul>
-                                            <NavLink to={'/optimise'}>Optimise</NavLink>
-                                            <NavLink to={'/convert'}>Convert</NavLink>
-                                            <NavLink to={'/base64'}>Base64</NavLink>
-                                        </ul>
-                                    </nav>
+                                    <Navigation/>
                                 </div>
                             </div>
                         </div>
