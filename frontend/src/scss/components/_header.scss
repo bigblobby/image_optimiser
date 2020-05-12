@@ -123,10 +123,11 @@
                         align-items: center;
                         height: 100%;
                         padding: 0 1rem;
-                        font-size: 14px;
+                        font-size: 16px;
                         width: 100%;
 
                         @include media-breakpoint-up(sm){
+                            font-size: 14px;
                             width: auto;
                             margin-left: 0.5rem;
                         }

@@ -2,8 +2,12 @@
     .drag-and-drop--box {
         position: relative;
         background-color: $gallery;
-        height: 600px;
+        height: 400px;
         cursor: pointer;
+
+        @include media-breakpoint-up(sm){
+            height: 600px;
+        }
 
         &.disable {
             pointer-events: none;

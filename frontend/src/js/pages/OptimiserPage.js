@@ -30,7 +30,7 @@ class OptimiserPage extends React.Component {
                 <div className="optimiser-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center ">Image optimiser</h1>
-                        <p className="heading-caption text-center mb-5">Resize and optimise. At the moment we only accept PNG and JPEG/JPG files.</p>
+                        <p className="heading-caption text-center">Resize and optimise. At the moment we only accept PNG and JPEG/JPG files.</p>
                         <div className="optimiser-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop

@@ -1,9 +1,27 @@
 .base64-page {
-    margin-top: 3rem;
+    margin-top: 2rem;
+
+    @include media-breakpoint-up(sm){
+        margin-top: 3rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+
+        @include media-breakpoint-up(sm){
+            font-size: 2.5rem;
+        }
+    }
 
     .heading-caption {
         max-width: 550px;
-        margin: 0 auto;
+        margin: 0 auto 2rem;
+        font-size: 15px;
+
+        @include media-breakpoint-up(sm){
+            font-size: 16px;
+            margin: 0 auto 3rem;
+        }
     }
 }
 

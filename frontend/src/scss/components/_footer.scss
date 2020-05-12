@@ -1,14 +1,36 @@
 .footer {
     font-size: 13px;
-    height: 50px;
+    height: 90px;
     margin-top: auto;
     background-color: $gallery;
+    padding: 0 15px;
+
+    @media screen and (min-width: 400px) {
+        height: 70px;
+    }
+
+    @include media-breakpoint-up(sm){
+        height: 50px;
+    }
 
     .footer--inner {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
+        text-align: center;
+
+        span {
+            display: block;
+
+            @include media-breakpoint-up(sm){
+                display: inline;
+            }
+
+            &.site-made-by {
+                margin-bottom: 0.5rem;
+            }
+        }
 
         a {
             color: $red;

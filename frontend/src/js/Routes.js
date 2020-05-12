@@ -56,7 +56,10 @@ export default class Routes extends React.Component {
 
                         <div className="footer">
                             <div className="footer--inner">
-                                <div>Site made by <a className="link--red" href="https://www.linkedin.com/in/thomas-dempster-00843bb7" rel="noopener noreferrer" target="_blank">Tom Dempster</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" rel="noopener noreferrer" target="_blank" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/pixel-perfect" rel="noopener noreferrer" target="_blank" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" rel="noopener noreferrer" target="_blank" title="Flaticon">www.flaticon.com</a></div>
+                                <div>
+                                    <span className="site-made-by">Site made by <a className="link--red" href="https://www.linkedin.com/in/thomas-dempster-00843bb7" rel="noopener noreferrer" target="_blank">Tom Dempster</a>.</span>
+                                    <span className="icons-made-by"> Icons made by <a href="https://www.flaticon.com/authors/freepik" rel="noopener noreferrer" target="_blank" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/pixel-perfect" rel="noopener noreferrer" target="_blank" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" rel="noopener noreferrer" target="_blank" title="Flaticon">www.flaticon.com</a></span>
+                                </div>
                             </div>
                         </div>
                     </div>
