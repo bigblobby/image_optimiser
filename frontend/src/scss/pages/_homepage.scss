@@ -16,6 +16,7 @@
         .info-container {
             flex: 1 0 100%;
             max-width: 100%;
+            text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -24,6 +25,7 @@
             @include media-breakpoint-up(md){
                 flex: 1 0 50%;
                 max-width: 50%;
+                text-align: left;
                 padding: 3rem;
                 margin-bottom: 0;
             }

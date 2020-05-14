@@ -20,7 +20,7 @@ class Homepage extends React.Component {
                         <div className="panel-section mt-5">
                             <div className="info-container order-1 order-md-0">
                                 <h2>Optimise and resize.</h2>
-                                <p>Bigger isn't always better. Your images are too large, in filesize and resolution. You can change that here.</p>
+                                <p>Reduce the size of your images in filesize and resolution.</p>
                                 <div>
                                     <Link className="btn btn--green" to="/optimise">Optimise</Link>
                                 </div>
@@ -35,7 +35,7 @@ class Homepage extends React.Component {
                             </div>
                             <div className="info-container order-1 order-md-0">
                                 <h2>Convert.</h2>
-                                <p>Bored of the same format? Convert those images into something you really want.</p>
+                                <p>Change your images to PNG, JPEG or WEBP.</p>
                                 <div>
                                     <Link className="btn btn--green" to="/convert">Convert</Link>
                                 </div>
@@ -44,7 +44,7 @@ class Homepage extends React.Component {
                         <div className="panel-section mb-5">
                             <div className="info-container order-1 order-md-0">
                                 <h2>Encode your images.</h2>
-                                <p>You need a quick encoder that doesn't make you upload your images. Well, here you go.</p>
+                                <p>A base64 encoder that doesn't make you upload your images.</p>
                                 <div>
                                     <Link className="btn btn--green" to="/base64">Encode</Link>
                                 </div>

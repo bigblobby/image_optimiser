@@ -36,7 +36,8 @@ class OptimiserOptions extends React.Component {
         });
     };
 
-    uploadFiles = () => {
+    uploadFiles = (e) => {
+        e.preventDefault();
         const self = this;
 
         if(!this.props.images.length){
@@ -87,15 +88,7 @@ class OptimiserOptions extends React.Component {
 
     downloadZip = () => {
         const filename = this.props.downloadFilename;
-
-        Api.downloadZip(`/api/image/download/zip/${filename}`)
-            .then(result => {
-                const link = document.createElement('a');
-                link.href = result;
-                link.setAttribute('download', 'images.zip');
-                document.body.appendChild(link);
-                link.click();
-            });
+        ImageHelper.retrieveZipFile(filename);
     };
 
     addSvgActiveClass = () => {
@@ -106,7 +99,7 @@ class OptimiserOptions extends React.Component {
 
     render(){
         return (
-            <div className="optimiser-options--container">
+            <form className="optimiser-options--container" onSubmit={this.uploadFiles}>
                 {
                     this.props.percentCompleted ? (
                         <div className="upload-overlay overlay">
@@ -127,7 +120,7 @@ class OptimiserOptions extends React.Component {
                                                      xmlSpace="preserve">
                                                     <path className="circ path" style={ {
                                                         fill: 'none',
-                                                        stroke: '#2EBF4F',
+                                                        stroke: '#0dbf73',
                                                         strokeWidth: 3,
                                                         strokeLinejoin: 'round',
                                                         strokeMiterlimit: 10
@@ -138,7 +131,7 @@ class OptimiserOptions extends React.Component {
                                                     <polyline className="tick path"
                                                               style={ {
                                                                   fill: 'none',
-                                                                  stroke: '#2EBF4F',
+                                                                  stroke: '#0dbf73',
                                                                   strokeWidth: 3,
                                                                   strokeMiterlimit: 15
                                                               } }
@@ -179,10 +172,11 @@ class OptimiserOptions extends React.Component {
                         <div className="form-row">
                             <div className="col-6">
                                 <div className="form-row">
-                                    <div className="col-12 label">Width <span className="help-text">(Empty = auto)</span></div>
+                                    <label className="col-12 label" htmlFor="options_width">Width <span className="help-text">(Empty = auto)</span></label>
                                     <div className="col-12">
                                         <input
                                             className="form-control"
+                                            id="options_width"
                                             type="text"
                                             name="width"
                                             value={this.state.width}
@@ -193,10 +187,11 @@ class OptimiserOptions extends React.Component {
                             </div>
                             <div className="col-6">
                                 <div className="form-row">
-                                    <div className="col-12 label">Height <span className="help-text">(Empty = auto)</span></div>
+                                    <label className="col-12 label" htmlFor="options_height">Height <span className="help-text">(Empty = auto)</span></label>
                                     <div className="col-12">
                                         <input
                                             className="form-control"
+                                            id="options_height"
                                             type="text"
                                             name="height"
                                             value={this.state.height}
@@ -250,7 +245,7 @@ class OptimiserOptions extends React.Component {
                     {
                         !this.props.downloadImage && !this.props.downloadFilename && (
                             <div className={"button-container upload-button-container " + (this.state.uploading ? 'disabled' : '')}>
-                                <button className={"btn btn--green " + (this.props.uploading ? 'disabled' : '')} onClick={this.uploadFiles}>Upload</button>
+                                <button className={"btn btn--green " + (this.props.uploading ? 'disabled' : '')} type="submit">Upload</button>
                                 {
                                     this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
                                 }
@@ -258,7 +253,7 @@ class OptimiserOptions extends React.Component {
                         )
                     }
                 </div>
-            </div>
+            </form>
         )
     }
 }

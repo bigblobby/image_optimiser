@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid'
+import Api from "../api";
 
 class ImageHelper {
 
@@ -38,6 +39,17 @@ class ImageHelper {
         }
 
         return Promise.all(promises)
+    }
+
+    retrieveZipFile(filename){
+        Api.downloadZip(`/api/image/download/zip/${filename}`)
+            .then(result => {
+                const link = document.createElement('a');
+                link.href = result;
+                link.setAttribute('download', 'images.zip');
+                document.body.appendChild(link);
+                link.click();
+            });
     }
 }
 

@@ -30,7 +30,8 @@ class ConvertOptions extends React.Component {
         });
     }
 
-    uploadFiles = () => {
+    uploadFiles = (e) => {
+        e.preventDefault();
         const self = this;
 
         if(!this.props.images.length){
@@ -75,7 +76,7 @@ class ConvertOptions extends React.Component {
 
     render(){
         return (
-            <div className="convert-options--container">
+            <form className="convert-options--container" onSubmit={this.uploadFiles}>
                 {
                     this.props.percentCompleted ? (
                         <div className="upload-overlay overlay">
@@ -96,7 +97,7 @@ class ConvertOptions extends React.Component {
                                                      xmlSpace="preserve">
                                                     <path className="circ path" style={ {
                                                         fill: 'none',
-                                                        stroke: '#2EBF4F',
+                                                        stroke: '#0dbf73',
                                                         strokeWidth: 3,
                                                         strokeLinejoin: 'round',
                                                         strokeMiterlimit: 10
@@ -107,7 +108,7 @@ class ConvertOptions extends React.Component {
                                                     <polyline className="tick path"
                                                               style={ {
                                                                   fill: 'none',
-                                                                  stroke: '#2EBF4F',
+                                                                  stroke: '#0dbf73',
                                                                   strokeWidth: 3,
                                                                   strokeMiterlimit: 15
                                                               } }
@@ -143,12 +144,12 @@ class ConvertOptions extends React.Component {
                     </div>
                 </div>
                 <div className={"button-container upload-button-container "}>
-                    <button className={"btn btn--green "} onClick={this.uploadFiles}>Convert</button>
+                    <button className={"btn btn--green "} type="submit">Convert</button>
                     {
                         this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
                     }
                 </div>
-            </div>
+            </form>
         )
     }
 }
