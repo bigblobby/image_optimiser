@@ -13,6 +13,7 @@ function imageOptimiserReducer(state = initialState, action){
         case "ADD_IMAGES":
             return {
                 ...state,
+                error: null,
                 images: [...state.images, ...action.payload]
             };
         case "REMOVE_IMAGE":

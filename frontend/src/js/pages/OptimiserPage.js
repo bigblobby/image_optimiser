@@ -24,7 +24,7 @@ class OptimiserPage extends React.Component {
         return (
             <>
                 <Helmet>
-                    <title>Fishy images | Optimise</title>
+                    <title>I Hate Images | Optimise</title>
                 </Helmet>
 
                 <div className="optimiser-page">

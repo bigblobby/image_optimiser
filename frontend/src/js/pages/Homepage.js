@@ -12,7 +12,7 @@ class Homepage extends React.Component {
         return (
             <>
                 <Helmet>
-                    <title>Fishy images | Convert, Base64 and Optimise your images</title>
+                    <title>I Hate Images | Optimise, Convert and Base64 your images</title>
                 </Helmet>
 
                 <div className="homepage">

@@ -29,19 +29,6 @@ class Base64Page extends React.Component {
         document.execCommand('copy');
     };
 
-    // onDrop = () => {
-    //     this.setState({
-    //         loading: true
-    //     }, () => {
-    //         console.log(this.textarea.current);
-    //         // console.log(this.props.images[0].displayImage);
-    //         setTimeout(() => {
-    //             this.textarea.current.value = this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.'
-    //
-    //         },0);
-    //     });
-    // }
-
     output = () => {
         return this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.';
     }
@@ -50,7 +37,7 @@ class Base64Page extends React.Component {
         return (
             <>
                 <Helmet>
-                    <title>Fishy images | Base64</title>
+                    <title>I Hate Images | Base64</title>
                 </Helmet>
 
                 <div className="base64-page">

@@ -24,7 +24,7 @@ class ConvertPage extends React.Component {
         return (
             <>
                 <Helmet>
-                    <title>Fishy images | Convert</title>
+                    <title>I Hate Images | Convert</title>
                 </Helmet>
                 <div className="convert-page">
                     <div className="container-fluid max-width">
