@@ -64,7 +64,7 @@ class ConvertOptions extends React.Component {
     render(){
         return (
             <form className="convert-options--container" onSubmit={this.uploadFiles}>
-                <UploadOverlay />
+                <UploadOverlay bufferText={"Converting"} />
                 <div>
                     <div className="form-group">
                         <label htmlFor="options_filetype">Convert your file to</label>

@@ -81,7 +81,7 @@ class OptimiserOptions extends React.Component {
     render(){
         return (
             <form className="optimiser-options--container" onSubmit={this.uploadFiles}>
-                <UploadOverlay />
+                <UploadOverlay bufferText={"Optimising"} />
                 <div>
                     <fieldset className="dimensions form-group">
                         <legend>

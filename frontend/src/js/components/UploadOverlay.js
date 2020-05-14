@@ -6,6 +6,10 @@ import {
 import ImageHelper from "../helpers/image";
 
 class UploadOverlay extends React.Component {
+    static defaultProps = {
+        bufferText: 'Optimising'
+    }
+
     constructor(props) {
         super(props);
 
@@ -82,7 +86,7 @@ class UploadOverlay extends React.Component {
                                 {
                                     this.props.percentCompleted === 100 && !this.props.uploadComplete && (
                                         <div className="optimising-message--container">
-                                            <span>Optimising</span>
+                                            <span>{ this.props.bufferText }</span>
                                         </div>
                                     )
                                 }
