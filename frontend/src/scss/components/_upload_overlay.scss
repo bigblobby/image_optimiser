@@ -19,6 +19,12 @@
         width: 100%;
     }
 
+    .optimising-message--container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
     .download-button--container {
         position: absolute;
         left: 50%;

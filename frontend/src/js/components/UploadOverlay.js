@@ -75,6 +75,13 @@ class UploadOverlay extends React.Component {
                                     </div>
                                 </div>
                                 {
+                                    this.props.percentCompleted === 100 && !this.props.uploadComplete && (
+                                        <div className="optimising-message--container">
+                                            <span>Optimising...</span>
+                                        </div>
+                                    )
+                                }
+                                {
                                     this.props.downloadImage && (
                                         <div className="download-button--container d-flex align-items-center">
                                             <a className="btn btn--red" href={this.props.downloadImage} download>Download</a>
