@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    resetOptimiser,
     triggerUploadComplete,
     updateErrorMessage,
     updateProgress
@@ -19,8 +18,7 @@ class OptimiserOptions extends React.Component {
             height: '',
             quality: 100,
             fitment: 'cover',
-            position: 'center',
-            showTickIcon: false,
+            position: 'center'
         }
     }
 
@@ -162,16 +160,12 @@ class OptimiserOptions extends React.Component {
                 </div>
 
                 <div>
-                    {
-                        !this.props.downloadImage && !this.props.downloadFilename && (
-                            <div className={"button-container upload-button-container " + (this.state.uploading ? 'disabled' : '')}>
-                                <button className={"btn btn--green " + (this.props.uploading ? 'disabled' : '')} type="submit">Upload</button>
-                                {
-                                    this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
-                                }
-                            </div>
-                        )
-                    }
+                    <div className="button-container upload-button-container">
+                        <button className="btn btn--green" type="submit">Upload</button>
+                        {
+                            this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
+                        }
+                    </div>
                 </div>
             </form>
         )
@@ -179,15 +173,10 @@ class OptimiserOptions extends React.Component {
 }
 
 const mapStateToProps = ({imageOptimiser}) => {
-    const {images, uploading, uploadComplete, downloadFilename, downloadImage, percentCompleted, error} = imageOptimiser;
+    const {images, error} = imageOptimiser;
     return {
         images,
-        uploading,
-        downloadFilename,
-        downloadImage,
-        error,
-        uploadComplete,
-        percentCompleted
+        error
     };
 };
 
@@ -196,7 +185,6 @@ const mapDispatchToProps = (dispatch) => {
         triggerUploadComplete: (data) => dispatch(triggerUploadComplete(data)),
         updateProgress: (percent) => dispatch(updateProgress(percent)),
         updateErrorMessage: (message) => dispatch(updateErrorMessage(message)),
-        resetOptimiser: () => dispatch(resetOptimiser())
     }
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Api from '../api';
 import {
-    resetOptimiser,
     triggerUploadComplete,
     updateErrorMessage,
     updateProgress
@@ -14,8 +13,7 @@ class ConvertOptions extends React.Component {
         super(props);
 
         this.state = {
-            outputFiletype: 'png',
-            showTickIcon: false
+            outputFiletype: 'png'
         }
     }
 
@@ -77,8 +75,8 @@ class ConvertOptions extends React.Component {
                         </select>
                     </div>
                 </div>
-                <div className={"button-container upload-button-container "}>
-                    <button className={"btn btn--green "} type="submit">Convert</button>
+                <div className="button-container upload-button-container">
+                    <button className="btn btn--green" type="submit">Convert</button>
                     {
                         this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
                     }
@@ -89,15 +87,10 @@ class ConvertOptions extends React.Component {
 }
 
 const mapStateToProps = ({imageOptimiser}) => {
-    const {images, uploading, uploadComplete, downloadFilename, downloadImage, percentCompleted, error} = imageOptimiser;
+    const {images, error} = imageOptimiser;
     return {
         images,
-        uploading,
-        downloadFilename,
-        downloadImage,
-        error,
-        uploadComplete,
-        percentCompleted
+        error
     };
 };
 
@@ -106,7 +99,6 @@ const mapDispatchToProps = (dispatch) => {
         triggerUploadComplete: (data) => dispatch(triggerUploadComplete(data)),
         updateProgress: (percent) => dispatch(updateProgress(percent)),
         updateErrorMessage: (message) => dispatch(updateErrorMessage(message)),
-        resetOptimiser: () => dispatch(resetOptimiser())
     }
 };
 
