@@ -42,7 +42,7 @@ class UploadOverlay extends React.Component {
                                     <div className="progress-bar">
                                         <div className="track"></div>
                                         <div className="progress" style={ { width: this.props.percentCompleted + '%' } }></div>
-                                        <span className="percentage" style={{ left: `calc(${this.props.percentCompleted}% - 12px)` }}>{!this.props.uploadComplete && this.props.percentCompleted + "%"}</span>
+                                        <span className="percentage" style={{ left: `calc(${this.props.percentCompleted}% - 12px)` }}>{this.props.percentCompleted !== 100 && this.props.percentCompleted + "%"}</span>
                                     </div>
                                     <div className="tick-container">
                                         <div className="tick-icon--container">
