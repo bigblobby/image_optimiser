@@ -24,12 +24,6 @@ class OptimiserOptions extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if(prevProps.uploadComplete !== this.props.uploadComplete){
-            this.addSvgActiveClass();
-        }
-    }
-
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -86,18 +80,10 @@ class OptimiserOptions extends React.Component {
         }
     };
 
-    addSvgActiveClass = () => {
-        setTimeout(() => {
-            this.setState({ showTickIcon: true });
-        }, 0);
-    };
-
     render(){
         return (
             <form className="optimiser-options--container" onSubmit={this.uploadFiles}>
-                <UploadOverlay
-                    showTickIcon={this.state.showTickIcon}
-                />
+                <UploadOverlay />
                 <div>
                     <fieldset className="dimensions form-group">
                         <legend>

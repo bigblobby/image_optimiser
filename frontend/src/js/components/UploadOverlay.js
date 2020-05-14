@@ -6,6 +6,25 @@ import {
 import ImageHelper from "../helpers/image";
 
 class UploadOverlay extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showTickIcon: false
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if((prevProps.percentCompleted !== this.props.percentCompleted) && this.props.percentCompleted === 100){
+            this.addSvgActiveClass();
+        }
+    }
+
+    addSvgActiveClass = () => {
+        setTimeout(() => {
+            this.setState({ showTickIcon: true });
+        }, 0);
+    };
 
     downloadZip = () => {
         const filename = this.props.downloadFilename;
@@ -28,7 +47,7 @@ class UploadOverlay extends React.Component {
                                     {
                                         !this.props.uploadComplete ? this.props.percentCompleted + "%" : (
                                             <div className="tick-icon--container">
-                                                <svg className={ this.props.showTickIcon ? "draw" : "" } version="1.1"
+                                                <svg className={ this.state.showTickIcon ? "draw" : "" } version="1.1"
                                                      id="tick-icon" xmlns="http://www.w3.org/2000/svg"
                                                      xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                      viewBox="0 0 37 37" style={ { enableBackground: 'new 0 0 37 37' } }

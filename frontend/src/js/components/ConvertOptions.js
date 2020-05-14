@@ -19,12 +19,6 @@ class ConvertOptions extends React.Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if((prevProps.percentCompleted !== this.props.percentCompleted) && this.props.percentCompleted === 100){
-            this.addSvgActiveClass();
-        }
-    }
-
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -69,16 +63,10 @@ class ConvertOptions extends React.Component {
         //}
     };
 
-    addSvgActiveClass = () => {
-        setTimeout(() => {
-            this.setState({ showTickIcon: true });
-        }, 0);
-    };
-
     render(){
         return (
             <form className="convert-options--container" onSubmit={this.uploadFiles}>
-                <UploadOverlay showTickIcon={this.state.showTickIcon} />
+                <UploadOverlay />
                 <div>
                     <div className="form-group">
                         <label htmlFor="options_filetype">Convert your file to</label>
