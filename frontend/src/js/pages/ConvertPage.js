@@ -29,7 +29,7 @@ class ConvertPage extends React.Component {
                 <div className="convert-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center">Convert images</h1>
-                        <p className="heading-caption text-center">Convert your images to PNG, JPG and WEBP.</p>
+                        <p className="heading-caption text-center">Convert to PNG, JPEG/JPG and WEBP.</p>
                         <div className="convert-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop

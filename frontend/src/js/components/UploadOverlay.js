@@ -31,6 +31,11 @@ class UploadOverlay extends React.Component {
         ImageHelper.retrieveZipFile(filename);
     };
 
+    resetButton = () => {
+        this.props.resetOptimiser();
+        this.setState({ showTickIcon: false });
+    }
+
     render() {
         return (
             <>
@@ -77,7 +82,7 @@ class UploadOverlay extends React.Component {
                                 {
                                     this.props.percentCompleted === 100 && !this.props.uploadComplete && (
                                         <div className="optimising-message--container">
-                                            <span>Optimising...</span>
+                                            <span>Optimising</span>
                                         </div>
                                     )
                                 }
@@ -85,7 +90,7 @@ class UploadOverlay extends React.Component {
                                     this.props.downloadImage && (
                                         <div className="download-button--container d-flex align-items-center">
                                             <a className="btn btn--red" href={this.props.downloadImage} download>Download</a>
-                                            <a className="reset ml-3" onClick={this.props.resetOptimiser}>Upload more images?</a>
+                                            <a className="reset ml-3" onClick={this.resetButton}>Upload more images?</a>
                                         </div>
                                     )
                                 }
@@ -93,7 +98,7 @@ class UploadOverlay extends React.Component {
                                     this.props.downloadFilename && (
                                         <div className="download-button--container d-flex align-items-center">
                                             <a className="btn btn--red" onClick={this.downloadZip}>Download</a>
-                                            <a className="reset ml-3" onClick={this.props.resetOptimiser}>Upload more images?</a>
+                                            <a className="reset ml-3" onClick={this.resetButton}>Upload more images?</a>
                                         </div>
                                     )
                                 }

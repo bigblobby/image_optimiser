@@ -27,7 +27,6 @@ class Base64Page extends React.Component {
     copyToClipboard = () => {
         this.textarea.current.select();
         document.execCommand('copy');
-        console.log('copied to clipboard')
     };
 
     // onDrop = () => {
@@ -57,7 +56,7 @@ class Base64Page extends React.Component {
                 <div className="base64-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center">Base64 Encode Images</h1>
-                        <p className="heading-caption text-center">Encode your PNG, JPEG/JPG and SVG files.<br /> Large images can take up to 30 seconds to encode, please be patient!</p>
+                        <p className="heading-caption text-center">Encode PNG, JPEG/JPG and SVG files.</p>
                         <div className="base64-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop

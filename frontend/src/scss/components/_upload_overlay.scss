@@ -23,6 +23,22 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+
+        span {
+            display: block;
+            position: relative;
+
+            &:after {
+                position: absolute;
+                content: "\2026";
+                display: inline-block;
+                overflow: hidden;
+                vertical-align: bottom;
+                -webkit-animation: ellipsis steps(4,end) 900ms infinite;
+                animation: ellipsis steps(4,end) 900ms infinite;
+                width: 0;
+            }
+        }
     }
 
     .download-button--container {
