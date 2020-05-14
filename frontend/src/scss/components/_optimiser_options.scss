@@ -12,28 +12,19 @@
     }
 }
 
-.button-container {
-    &.upload-button-container {
-        display: flex;
-        align-items: center;
-        margin-top: 1rem;
+.upload-button-container {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
 
-        &.disabled {
-            cursor: not-allowed;
-        }
-
-        button {
-            &.disabled {
-                pointer-events: none;
-
-            }
-        }
+    &.disabled {
+        cursor: not-allowed;
     }
 
-    .reset {
-        font-size: 14px;
-        text-decoration: underline;
-        color: $silver_chalice;
-        cursor: pointer;
+    button {
+        &.disabled {
+            pointer-events: none;
+        }
     }
 }
+

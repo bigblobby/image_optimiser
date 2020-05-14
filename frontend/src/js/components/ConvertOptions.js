@@ -75,7 +75,7 @@ class ConvertOptions extends React.Component {
                         </select>
                     </div>
                 </div>
-                <div className="button-container upload-button-container">
+                <div className="upload-button-container">
                     <button className="btn btn--green" type="submit">Convert</button>
                     {
                         this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>

@@ -24,13 +24,19 @@
             border-radius: 5px;
             transition: width 0.1s linear;
         }
+
+        .percentage {
+            position: absolute;
+            left: 0;
+            top: -30px;
+            transition: left 0.1s linear;
+        }
     }
 
-    .percentage {
+    .tick-container {
         flex-basis: 10%;
         padding-left: 1rem;
         text-align: center;
-        //color: $white;
         color: $mineshaft;
     }
 }

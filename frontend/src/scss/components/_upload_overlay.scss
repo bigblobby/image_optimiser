@@ -13,4 +13,23 @@
         background-color: rgba(255,255,255,0.9);
         padding: 1rem;
     }
+
+    .overlay--inner {
+        position: relative;
+        width: 100%;
+    }
+
+    .download-button--container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .reset {
+            font-size: 14px;
+            text-decoration: underline;
+            color: $silver_chalice;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+    }
 }
