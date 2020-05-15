@@ -21,7 +21,7 @@ const updateProgressAction = (percent) => ({
 });
 
 const updateErrorAction = (message) => ({
-    type: "ERROR",
+    type: "UPDATE_ERROR",
     payload: message
 });
 

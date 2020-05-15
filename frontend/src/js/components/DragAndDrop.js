@@ -58,6 +58,8 @@ class DragAndDrop extends React.Component {
         } else if(files.length !== allowedFiles.length) {
             this.props.updateErrorMessage('Sorry! Some of your files can\'t be accepted as they\'re the wrong type.');
         } else {
+            this.props.updateErrorMessage(null);
+
             if(this.props.onDropCallback){
                 this.props.onDropCallback();
             }
