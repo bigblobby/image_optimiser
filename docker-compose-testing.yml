@@ -10,7 +10,7 @@ services:
             - './backend:/usr/src/app'
             - '/usr/src/app/node_modules'
         environment:
-            - NODE_ENV=production
+            - NODE_ENV=testing
 
     frontend-testing:
         restart: unless-stopped
