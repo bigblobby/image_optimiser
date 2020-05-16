@@ -43,6 +43,15 @@ function filterWithFile(filepath, settings) {
 
     return new Promise((resolve, reject) => {
         // Check if file exists already, this stops the image being filtered again
+        const qualityOptions = {
+            quality: quality
+        }
+        if(fileType === 'png') {
+            qualityOptions.palette = true;
+            qualityOptions.compressionLevel = 5;
+            qualityOptions.adaptiveFiltering = true;
+        }
+
         fs.stat(checkedLocation, function(err, stat) {
             if(err) {
                 //console.error(err);
@@ -53,7 +62,7 @@ function filterWithFile(filepath, settings) {
                         fit: fit,
                         position: position
                     })
-                    [fileType]({ quality: quality })
+                    [fileType](qualityOptions)
                     .toFile(outputLocation)
                     .then(info => {
                         //console.log(info);
@@ -78,6 +87,15 @@ function filterWithBuffer(settings){
     const imgBuffer = Buffer.from(imageData, 'base64');
 
     return new Promise((resolve, reject) => {
+        const qualityOptions = {
+            quality: settings.quality
+        }
+        if(fileType === 'png') {
+            qualityOptions.palette = true;
+            qualityOptions.compressionLevel = 5;
+            qualityOptions.adaptiveFiltering = true;
+        }
+
         sharp(imgBuffer)
             .resize({
                 height: settings.height,
@@ -85,7 +103,7 @@ function filterWithBuffer(settings){
                 fit: settings.fit,
                 position: settings.position
             })
-            [fileType]({ quality: settings.quality })
+            [fileType](qualityOptions)
             .toBuffer()
             .then(data => {
                 const base64image = `data:${mimeType};base64,${data.toString('base64')}`;

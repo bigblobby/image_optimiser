@@ -160,7 +160,7 @@ class OptimiserOptions extends React.Component {
                 </div>
 
                 <div className="upload-button-container">
-                    <button className="btn btn--green" type="submit">Upload</button>
+                    <button className="btn btn--green" type="submit">Optimise</button>
                     {
                         this.props.error && <span className="invalid-feedback d-block ml-2">{this.props.error}</span>
                     }

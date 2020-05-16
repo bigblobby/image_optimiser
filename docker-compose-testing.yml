@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+    backend-testing:
+        restart: unless-stopped
+        build:
+            context: ./backend
+            dockerfile: Dockerfile-testing
+        volumes:
+            - './backend:/usr/src/app'
+            - '/usr/src/app/node_modules'
+        environment:
+            - NODE_ENV=production
+
+    frontend-testing:
+        restart: unless-stopped
+        build:
+            context: ./frontend
+            dockerfile: Dockerfile-testing
+        environment:
+            - NODE_ENV=production
+        depends_on:
+            - backend-testing
+        ports:
+            - "80:80"
