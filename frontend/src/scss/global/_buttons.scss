@@ -41,4 +41,14 @@ a {
             color: $white;
         }
     }
+
+    &.btn--white {
+        background-color: $white;
+        color: $punch;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
 }

@@ -133,7 +133,7 @@
                         }
 
                         &.active {
-                            color: $red;
+                            color: $punch;
 
                             @include media-breakpoint-up(sm){
                                 color: $jaguar;
@@ -161,7 +161,7 @@
                             bottom: 0;
                             height: 2px;
                             width: 100%;
-                            background-color: $red;
+                            background-color: $punch;
                             transform: scale(0);
                             transition: transform 0.2s ease;
                         }

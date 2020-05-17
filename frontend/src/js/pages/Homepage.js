@@ -17,6 +17,14 @@ class Homepage extends React.Component {
                 </Helmet>
 
                 <div className="homepage">
+                    <div className="hero">
+                        <div  className="container-fluid max-width">
+                            <div className="hero--inner">
+                                <h1>Optimise, resize, convert, encode.</h1>
+                                <Link className="btn btn--white" to="/optimise">Start now</Link>
+                            </div>
+                        </div>
+                    </div>
                     <div className="container-fluid max-width">
                         <div className="panel-section mt-5">
                             <div className="info-container order-1 order-md-0">
