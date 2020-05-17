@@ -100,9 +100,9 @@ class DragAndDrop extends React.Component {
             });
 
             if(acceptedFiles.length < files.length && files.length === 1){
-                this.props.updateErrorMessage(`Your file is to large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
+                this.props.updateErrorMessage(`Your file is too large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
             } else if (acceptedFiles.length < files.length){
-                this.props.updateErrorMessage(`Some of your files were to large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
+                this.props.updateErrorMessage(`Some of your files were too large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
             }
         }
 
