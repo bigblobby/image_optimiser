@@ -8,6 +8,8 @@ import DragAndDrop from "../components/DragAndDrop";
 import ImageHelper from "../helpers/image";
 import { Helmet } from "react-helmet";
 
+const MAX_FILESIZE = 1000000;
+
 class Base64Page extends React.Component {
     constructor(props) {
         super(props);
@@ -43,12 +45,12 @@ class Base64Page extends React.Component {
                 <div className="base64-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center">Base64 Encode Images</h1>
-                        <p className="heading-caption text-center">Encode PNG, JPEG/JPG and SVG files.</p>
+                        <p className="heading-caption text-center">Encode PNG, JPEG/JPG and SVG files.<br /> (Max {ImageHelper.getFilesize(MAX_FILESIZE)} per image)</p>
                         <div className="base64-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
                                     fileLimit={1}
-                                    filesizeLimit={1000000}
+                                    filesizeLimit={MAX_FILESIZE}
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your image or click here"}
                                     helpText={"(1 image only)"}

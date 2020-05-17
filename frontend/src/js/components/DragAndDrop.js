@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
+import ImageHelper from '../helpers/image';
 import {
     removeImage,
     updateDisplayAndUploadFiles,
@@ -99,9 +100,9 @@ class DragAndDrop extends React.Component {
             });
 
             if(acceptedFiles.length < files.length && files.length === 1){
-                this.props.updateErrorMessage(`Your file is to large. Max: ${this.getFilesize(this.props.filesizeLimit)}.`);
+                this.props.updateErrorMessage(`Your file is to large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
             } else if (acceptedFiles.length < files.length){
-                this.props.updateErrorMessage(`Some of your files were to large. Max: ${this.getFilesize(this.props.filesizeLimit)}.`);
+                this.props.updateErrorMessage(`Some of your files were to large. Max: ${ImageHelper.getFilesize(this.props.filesizeLimit)}.`);
             }
         }
 
@@ -135,14 +136,6 @@ class DragAndDrop extends React.Component {
                 flexBasis: '33.33333%',
                 height: '25%'
             }
-        }
-    };
-
-    getFilesize = (filesize) => {
-        if(filesize < 1000000){
-            return ((filesize / 1000).toFixed(2)) + ' KB';
-        } else {
-            return ((filesize / 1000000).toFixed(2)) + ' MB';
         }
     };
 
@@ -188,7 +181,7 @@ class DragAndDrop extends React.Component {
                                             className="image"
                                             style={{backgroundImage: `url(${file.displayImage})`}}
                                         >
-                                            <div className="image-filesize">{this.getFilesize(file.uploadImage.size)}</div>
+                                            <div className="image-filesize">{ImageHelper.getFilesize(file.uploadImage.size)}</div>
                                             <div className="image-dimensions">{file.width} x {file.height}</div>
                                         </div>
                                     </div>

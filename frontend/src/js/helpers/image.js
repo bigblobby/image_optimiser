@@ -51,6 +51,14 @@ class ImageHelper {
                 link.click();
             });
     }
+
+    getFilesize(filesize){
+        if(filesize < 1000000){
+            return ((filesize / 1000).toFixed(2)) + 'KB';
+        } else {
+            return ((filesize / 1000000).toFixed(2)) + 'MB';
+        }
+    };
 }
 
 export default new ImageHelper();

@@ -6,6 +6,8 @@ import ImageHelper from "../helpers/image";
 import ConvertOptions from "../components/ConvertOptions";
 import {Helmet} from "react-helmet";
 
+const MAX_FILESIZE = 5000000;
+
 class ConvertPage extends React.Component {
     constructor(props) {
         super(props);
@@ -29,12 +31,12 @@ class ConvertPage extends React.Component {
                 <div className="convert-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center">Convert images</h1>
-                        <p className="heading-caption text-center">Convert to PNG, JPEG/JPG and WEBP.</p>
+                        <p className="heading-caption text-center">Convert to PNG, JPEG/JPG and WEBP.<br /> (Max {ImageHelper.getFilesize(MAX_FILESIZE)} per image)</p>
                         <div className="convert-page--inner">
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
                                     fileLimit={1}
-                                    filesizeLimit={5000000}
+                                    filesizeLimit={MAX_FILESIZE}
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your image or click here"}
                                     helpText={"(1 image only)"}
