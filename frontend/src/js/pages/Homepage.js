@@ -13,6 +13,7 @@ class Homepage extends React.Component {
             <>
                 <Helmet>
                     <title>I Hate Images | Optimise, Convert and Base64 your images</title>
+                    <meta name="description" content="Optimise, convert, encode. Everything is easy here. Just drag and drop." />
                 </Helmet>
 
                 <div className="homepage">

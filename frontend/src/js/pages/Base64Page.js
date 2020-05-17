@@ -40,6 +40,7 @@ class Base64Page extends React.Component {
             <>
                 <Helmet>
                     <title>I Hate Images | Base64</title>
+                    <meta name="description" content="Base64 encode your images using the easy to use drag and drop interface. No need to wait for your images to upload. Everything is done in browser." />
                 </Helmet>
 
                 <div className="base64-page">

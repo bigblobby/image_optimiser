@@ -27,7 +27,9 @@ class ConvertPage extends React.Component {
             <>
                 <Helmet>
                     <title>I Hate Images | Convert</title>
+                    <meta name="description" content="Convert you images to PNG, JPEG or WEBP. Its easy to use with the drag and drop interface, anyone can use it." />
                 </Helmet>
+
                 <div className="convert-page">
                     <div className="container-fluid max-width">
                         <h1 className="text-center">Convert images</h1>
