@@ -34,6 +34,7 @@ class ConvertPage extends React.Component {
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
                                     fileLimit={1}
+                                    filesizeLimit={5000000}
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your image or click here"}
                                     helpText={"(1 image only)"}

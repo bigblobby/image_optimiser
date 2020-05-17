@@ -48,6 +48,7 @@ class Base64Page extends React.Component {
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
                                     fileLimit={1}
+                                    filesizeLimit={1000000}
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your image or click here"}
                                     helpText={"(1 image only)"}

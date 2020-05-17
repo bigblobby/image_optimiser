@@ -35,6 +35,7 @@ class OptimiserPage extends React.Component {
                             <div className="drag-and-drop--container">
                                 <DragAndDrop
                                     fileLimit={12}
+                                    filesizeLimit={5000000}
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your images or click here"}
                                     helpText={"(up to 12 images)"}

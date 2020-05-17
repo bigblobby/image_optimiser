@@ -11,6 +11,7 @@ import {
 class DragAndDrop extends React.Component {
     static defaultProps = {
         fileLimit: 12,
+        filesizeLimit: null,
         handleFiles: () => {},
         onDropCallback: () => {},
         text: "",
@@ -65,10 +66,7 @@ class DragAndDrop extends React.Component {
             }
         }
 
-        if(this.state.dragging){
-            this.setState({dragging: false})
-        }
-
+        this.setState({dragging: false})
         this.handleFiles(allowedFiles);
     };
 
@@ -80,22 +78,39 @@ class DragAndDrop extends React.Component {
 
     handleManualUpload = async (e) => {
         const files = e.target.files;
-        this.handleFiles(files);
+
+        // If there is an error message present and the file choosen is allowed, remove error.
+        if(this.props.error){
+            this.props.updateErrorMessage(null);
+        }
+
+        this.handleFiles(Array.from(files));
 
         e.currentTarget.value = '';
     };
 
     handleFiles = async(files) => {
-        if(this.props.images.length + files.length > this.props.fileLimit){
+        const self = this;
+        let acceptedFiles = files;
+
+        if(this.props.filesizeLimit){
+            acceptedFiles = files.filter(file => {
+                return file.size <= self.props.filesizeLimit;
+            });
+
+            if(acceptedFiles.length < files.length && files.length === 1){
+                this.props.updateErrorMessage(`Your file is to large. Max: ${this.getFilesize(this.props.filesizeLimit)}.`);
+            } else if (acceptedFiles.length < files.length){
+                this.props.updateErrorMessage(`Some of your files were to large. Max: ${this.getFilesize(this.props.filesizeLimit)}.`);
+            }
+        }
+
+        if(this.props.images.length + acceptedFiles.length > this.props.fileLimit){
             this.props.updateErrorMessage(`You can only upload ${this.props.fileLimit} image(s) at a time.`);
             return;
         }
 
-        this.props.handleFiles(files);
-
-        this.setState({
-            dragging: false,
-        });
+        this.props.handleFiles(acceptedFiles);
     };
 
     removeImage = (e, id) => {
