@@ -27,12 +27,12 @@ class Homepage extends React.Component {
                                 </div>
                             </div>
                             <div className="image-container">
-                                <img src="/images/001-file-upload.svg" alt="Icon"/>
+                                <img src="/images/001-file-upload.svg" alt="Upload icon"/>
                             </div>
                         </div>
                         <div className="panel-section">
                             <div className="image-container">
-                                <img src="/images/003-switch.svg" alt="Icon"/>
+                                <img src="/images/003-switch.svg" alt="Convert icon"/>
                             </div>
                             <div className="info-container order-1 order-md-0">
                                 <h2>Convert.</h2>
@@ -51,7 +51,7 @@ class Homepage extends React.Component {
                                 </div>
                             </div>
                             <div className="image-container">
-                                <img src="/images/002-binary-file.svg" alt="Icon"/>
+                                <img src="/images/002-binary-file.svg" alt="Encode icon"/>
                             </div>
                         </div>
                     </div>

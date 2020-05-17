@@ -1,5 +1,4 @@
 // Action types
-
 const updateDisplayAndUploadFilesAction = (images) => ({
     type: "ADD_IMAGES",
     payload: images
@@ -29,8 +28,8 @@ const resetOptimiserAction = () => ({
     type: "RESET"
 });
 
-// Action creators
 
+// Action creators
 export function updateDisplayAndUploadFiles(images){
     return function(dispatch){
         dispatch(updateDisplayAndUploadFilesAction(images));

@@ -14,6 +14,7 @@ import history from "./history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
 import Navigation from "./components/Navigation";
+import Error404Page from "./pages/Error404Page";
 
 const middleware = [
     thunk,
@@ -52,6 +53,7 @@ export default class Routes extends React.Component {
                             <Route exact path="/optimise" component={OptimiserPage}/>
                             <Route exact path="/base64" component={Base64Page}/>
                             <Route exact path="/convert" component={ConvertPage}/>
+                            <Route component={Error404Page}/>
                         </Switch>
 
                         <div className="footer">
