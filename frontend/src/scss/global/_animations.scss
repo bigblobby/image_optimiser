@@ -9,3 +9,31 @@
         width: 1.15em;
     }
 }
+
+@keyframes spinner-svg-animation {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg)
+    }
+}
+
+@keyframes spinner-circle-animation {
+    0%,
+    25% {
+        stroke-dashoffset: 280;
+        transform: rotate(0);
+    }
+
+    50%,
+    75% {
+        stroke-dashoffset: 75;
+        transform: rotate(45deg);
+    }
+
+    100% {
+        stroke-dashoffset: 280;
+        transform: rotate(360deg);
+    }
+}

@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import thunk from 'redux-thunk';
 import { Route, Switch, Link } from 'react-router-dom';
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
-
-import Homepage from "./pages/Homepage";
-import OptimiserPage from "./pages/OptimiserPage";
-import Base64Page from "./pages/Base64Page";
-import ConvertPage from "./pages/ConvertPage";
-
 import rootReducer from "./reducers";
 import history from "./history";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
 import Navigation from "./components/Navigation";
-import Error404Page from "./pages/Error404Page";
 
 const middleware = [
     thunk,
@@ -29,6 +22,12 @@ const store = createStore(
         applyMiddleware(...middleware)
     ),
 );
+
+const Homepage = React.lazy(() => import("./pages/Homepage"));
+const OptimiserPage = React.lazy(() => import("./pages/OptimiserPage"));
+const Base64Page = React.lazy(() => import("./pages/Base64Page"));
+const ConvertPage = React.lazy(() => import("./pages/ConvertPage"));
+const Error404Page = React.lazy(() => import("./pages/Error404Page"));
 
 export default class Routes extends React.Component {
     render() {
@@ -48,13 +47,15 @@ export default class Routes extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <Switch>
-                            <Route exact path="/" component={Homepage} />
-                            <Route exact path="/optimise" component={OptimiserPage}/>
-                            <Route exact path="/base64" component={Base64Page}/>
-                            <Route exact path="/convert" component={ConvertPage}/>
-                            <Route component={Error404Page}/>
-                        </Switch>
+                        <Suspense fallback={''}>
+                            <Switch>
+                                <Route exact path="/" component={Homepage} />
+                                <Route exact path="/optimise" component={OptimiserPage}/>
+                                <Route exact path="/base64" component={Base64Page}/>
+                                <Route exact path="/convert" component={ConvertPage}/>
+                                <Route component={Error404Page}/>
+                            </Switch>
+                        </Suspense>
 
                         <div className="footer">
                             <div className="footer--inner">
