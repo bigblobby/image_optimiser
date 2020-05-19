@@ -28,6 +28,10 @@ class OptimiserPage extends React.Component {
                 <Helmet>
                     <title>I Hate Images | Optimise</title>
                     <meta name="description" content="Optimise and resize your images. Its easy to use with the drag and drop interface, anyone can use it." />
+                    <meta property="og:title" content="I Hate Images | Optimise" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:url" content="https://www.ihateimages.com" />
+                    <meta property="og:image" content="/images/fish.svg" />
                 </Helmet>
 
                 <div className="optimiser-page">

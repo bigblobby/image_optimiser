@@ -14,6 +14,10 @@ class Homepage extends React.Component {
                 <Helmet>
                     <title>I Hate Images | Optimise, Convert and Base64 your images</title>
                     <meta name="description" content="Optimise, convert, encode. Everything is easy here. Just drag and drop." />
+                    <meta property="og:title" content="I Hate Images | Optimise, Convert and Base64 your images" />
+                    <meta property="og:type" content="website" />
+                    <meta property="og:url" content="https://www.ihateimages.com" />
+                    <meta property="og:image" content="/images/fish.svg" />
                 </Helmet>
 
                 <div className="homepage">
