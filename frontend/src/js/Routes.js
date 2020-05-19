@@ -8,6 +8,12 @@ import history from "./history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
 import Navigation from "./components/Navigation";
+import GA from './helpers/GoogleAnalytics';
+
+// GA - Track page views
+history.listen((location, action) => {
+    GA.pageview(location.pathname);
+});
 
 const middleware = [
     thunk,
