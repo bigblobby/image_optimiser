@@ -8,16 +8,11 @@ import history from "./history";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from 'react-redux';
 import Navigation from "./components/Navigation";
-// import GA from './helpers/GoogleAnalytics';
+import GA from './helpers/GoogleAnalytics';
 
 // GA - Track page views
 history.listen((location, action) => {
-    if ("ga" in window) {
-        const tracker = window.ga.getAll()[0];
-        if (tracker) {
-            tracker.send("pageview", location.pathname);
-        }
-    }
+    GA.pageview(location.pathname)
 });
 
 const middleware = [
