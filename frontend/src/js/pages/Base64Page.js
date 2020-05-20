@@ -14,6 +14,10 @@ class Base64Page extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            outputFormat: 'raw'
+        }
+
         this.textarea = React.createRef();
     }
 
@@ -26,13 +30,35 @@ class Base64Page extends React.Component {
         this.props.updateDisplayAndUploadFiles(images);
     };
 
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
     copyToClipboard = () => {
         this.textarea.current.select();
         document.execCommand('copy');
     };
 
     output = () => {
-        return this.props.images.length > 0 ? this.props.images[0].displayImage : 'Your encoded string will appear here.';
+        if(this.props.images.length > 0){
+            if(this.state.outputFormat === 'raw'){
+                return this.props.images[0].displayImage.split(',')[1];
+            } else if(this.state.outputFormat === 'data_uri') {
+                return this.props.images[0].displayImage;
+            } else if(this.state.outputFormat === 'css_background') {
+                return `background-image: url("${this.props.images[0].displayImage}");`;
+            } else if(this.state.outputFormat === 'html_image') {
+                return `<img alt="" src="${this.props.images[0].displayImage}" />`;
+            } else if(this.state.outputFormat === 'js_image') {
+                return `const img = new Image();img.src = ${this.props.images[0].displayImage};`;
+            } else {
+                return this.props.images[0].displayImage;
+            }
+        } else {
+            return 'Your encoded string will appear here.';
+        }
     }
 
     render() {
@@ -64,6 +90,16 @@ class Base64Page extends React.Component {
                                 />
                             </div>
                             <div className="result--container">
+                                <div className="form-group">
+                                    <label className="" htmlFor="encode_output_format">Output format</label>
+                                    <select className="form-control" name="outputFormat" id="encode_output_format" onChange={this.handleChange} value={this.state.outputFormat}>
+                                        <option value="raw">Raw</option>
+                                        <option value="data_uri">Data URI</option>
+                                        <option value="css_background">CSS Background Image</option>
+                                        <option value="html_image">HTML Image</option>
+                                        <option value="js_image">Javascript Image</option>
+                                    </select>
+                                </div>
                                 <textarea readOnly ref={this.textarea} value={this.output()}/>
                                 <div className="button-container mt-3">
                                     <button className="btn btn--blue" onClick={this.copyToClipboard}>Copy to clipboard</button>

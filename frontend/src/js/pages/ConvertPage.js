@@ -9,10 +9,6 @@ import {Helmet} from "react-helmet";
 const MAX_FILESIZE = 5000000;
 
 class ConvertPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount(){
         this.props.resetOptimiser();
     }

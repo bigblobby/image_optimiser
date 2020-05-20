@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import { Helmet } from "react-helmet";
 
 class Homepage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <>

@@ -5,7 +5,9 @@ class GoogleAnalytics {
 
     init(){
         if ("ga" in window) {
-            this.tracker = window.ga.getAll()[0];
+            if(window.ga.getAll){
+                this.tracker = window.ga.getAll()[0];
+            }
         }
     }
 
