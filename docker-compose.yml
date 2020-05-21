@@ -11,6 +11,8 @@ services:
         environment:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING=true
+        depends_on:
+          - mysql
 
 
     frontend:
@@ -25,6 +27,21 @@ services:
             - NODE_ENV=development
         depends_on:
             - backend
+
+    mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: 'image_optimiser'
+            # So you don't have to use root, but you can if you like
+            MYSQL_USER: 'remote'
+            # You can use whatever password you like
+            MYSQL_PASSWORD: 'password'
+            # Password for root access
+            MYSQL_ROOT_PASSWORD: 'password'
+        volumes:
+        - './database:/var/lib/mysql'
+        ports:
+            - 3305:3306
 
     nginx:
         build:
