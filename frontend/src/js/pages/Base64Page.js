@@ -75,7 +75,7 @@ class Base64Page extends React.Component {
 
                 <div className="base64-page">
                     <div className="container-fluid max-width">
-                        <h1 className="text-center">Base64 Encode Images</h1>
+                        <h1 className="text-center">Base64 Encode</h1>
                         <p className="heading-caption text-center">Encode PNG, JPEG/JPG and SVG files.<br /> (Max {ImageHelper.getFilesize(MAX_FILESIZE)} per image)</p>
                         <div className="base64-page--inner">
                             <div className="drag-and-drop--container">

@@ -21,6 +21,7 @@ class Homepage extends React.Component {
                         <div  className="container-fluid max-width">
                             <div className="hero--inner">
                                 <h1>Optimise, resize, convert, encode.</h1>
+                                <p>Here are some tools to deal with your image needs.</p>
                                 <Link className="btn btn--white" to="/optimise">Start now</Link>
                             </div>
                         </div>

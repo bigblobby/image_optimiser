@@ -16,7 +16,7 @@ class OptimiserOptions extends React.Component {
         this.state = {
             width: '',
             height: '',
-            quality: 100,
+            quality: 80,
             fitment: 'cover',
             position: 'center'
         }

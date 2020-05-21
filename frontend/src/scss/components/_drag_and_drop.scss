@@ -4,6 +4,8 @@
         background-color: $gallery;
         height: 400px;
         cursor: pointer;
+        border: 2px dashed #9e9e9e;
+        border-radius: 0.25rem;
 
         @include media-breakpoint-up(sm){
             height: 600px;
@@ -81,12 +83,9 @@
         align-content: baseline;
         height: 100%;
         padding: 0.5rem;
-        border: 2px dashed $silver_chalice;
 
         .image-container {
             position: relative;
-            //flex-basis: 33.33333%;
-            //height: 25%;
             padding: 0.5rem;
             cursor: pointer;
 
