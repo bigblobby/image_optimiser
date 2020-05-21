@@ -55,8 +55,8 @@ class UploadOverlay extends React.Component {
                                     </div>
                                     <div className="tick-container">
                                         <div className="tick-icon--container">
-                                            <svg className={ this.state.showTickIcon ? "draw" : "" } version="1.1"
-                                                 id="tick-icon" xmlns="http://www.w3.org/2000/svg"
+                                            <svg className={ "tick-icon " + (this.state.showTickIcon ? "draw" : "") } version="1.1"
+                                                 xmlns="http://www.w3.org/2000/svg"
                                                  xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 37 37" style={ { enableBackground: 'new 0 0 37 37' } }
                                                  xmlSpace="preserve">
@@ -85,7 +85,7 @@ class UploadOverlay extends React.Component {
                                 </div>
                                 {
                                     this.props.percentCompleted === 100 && !this.props.uploadComplete && (
-                                        <div className="optimising-message--container">
+                                        <div className="buffer-message--container">
                                             <span>{ this.props.bufferText }</span>
                                         </div>
                                     )
