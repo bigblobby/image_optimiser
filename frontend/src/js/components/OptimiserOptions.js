@@ -47,36 +47,22 @@ class OptimiserOptions extends React.Component {
         const width = ValidationHelper.validateWidthHeight(this.state.width);
         const height = ValidationHelper.validateWidthHeight(this.state.height);
         const quality = ValidationHelper.validateQuality(this.state.quality);
+        const formData = new FormData();
 
-        if(this.props.images.length > 1){
-            const formData = new FormData();
-            for(let file of this.props.images){
-                formData.append('images', file.uploadImage);
-            }
+        for(let file of this.props.images){
+            formData.append('images', file.uploadImage);
+        }
 
-            formData.append('width', width);
-            formData.append('height', height);
-            formData.append('quality', quality);
-            formData.append('fitment', this.state.fitment);
-            formData.append('position', this.state.position);
+        formData.append('width', width);
+        formData.append('height', height);
+        formData.append('quality', quality);
+        formData.append('fitment', this.state.fitment);
+        formData.append('position', this.state.position);
 
-            Api.uploadMultipleImages(formData, config)
-                .then(result => {
-                    this.props.triggerUploadComplete(result);
-                });
-        } else {
-            const formData = new FormData();
-            formData.append('image', this.props.images[0].uploadImage);
-            formData.append('width', width);
-            formData.append('height', height);
-            formData.append('quality', quality);
-            formData.append('fitment', this.state.fitment);
-            formData.append('position', this.state.position);
-
-            Api.uploadSingleImage(formData, config).then(result => {
+        Api.uploadOptimiseImages(formData, config)
+            .then(result => {
                 this.props.triggerUploadComplete(result);
             });
-        }
     };
 
     render(){

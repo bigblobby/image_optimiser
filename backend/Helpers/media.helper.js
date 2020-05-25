@@ -2,22 +2,22 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-async function dataEncode(location, mimetype = 'image/png') {
-    return new Promise((resolve, reject) => {
-        fs.readFile(
-            location,
-            'base64',
-            (err, base64Image) => {
-                if(err) {
-                    reject(err);
-                }
-
-                const dataUrl = `data:${ mimetype };base64, ${ base64Image }`;
-                resolve(dataUrl);
-            }
-        );
-    });
-}
+// async function dataEncode(location, mimetype = 'image/png') {
+//     return new Promise((resolve, reject) => {
+//         fs.readFile(
+//             location,
+//             'base64',
+//             (err, base64Image) => {
+//                 if(err) {
+//                     reject(err);
+//                 }
+//
+//                 const dataUrl = `data:${ mimetype };base64, ${ base64Image }`;
+//                 resolve(dataUrl);
+//             }
+//         );
+//     });
+// }
 
 async function processImage(settings = {
     filename: '',
@@ -25,21 +25,10 @@ async function processImage(settings = {
     width: null,
     height: null,
     quality: 100
-}, preset) {
-
+}) {
     settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
     const filepath = 'uploads/' + settings.filename;
     return filterWithFile(filepath, settings);
-
-    // if(preset === 'buffer'){
-    //     settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
-    //     const filepath = 'uploads/' + settings.filename;
-    //     return filterWithBuffer(filepath, settings);
-    // } else if(preset === 'file') {
-    //     settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
-    //     const filepath = 'uploads/' + settings.filename;
-    //     return filterWithFile(filepath, settings);
-    // }
 }
 
 function filterWithFile(filepath, settings) {
@@ -60,7 +49,6 @@ function filterWithFile(filepath, settings) {
 
         fs.stat(checkedLocation, function(err, stat) {
             if(err) {
-                //console.error(err);
                 sharp(filepath)
                     .resize({
                         height: height,
@@ -71,11 +59,9 @@ function filterWithFile(filepath, settings) {
                     [fileType](qualityOptions)
                     .toFile(outputLocation)
                     .then(info => {
-                        //console.log(info);
                         resolve(outputLocation);
                     })
                     .catch(err => {
-                        console.log(err);
                         reject(err);
                     });
             } else {
@@ -83,43 +69,6 @@ function filterWithFile(filepath, settings) {
             }
         });
     });
-}
-
-function filterWithBuffer(filepath, settings){
-    const parts = settings.image.split(';');
-    const mimeType = parts[0].split(':')[1];
-    const imageData = parts[1].split(',')[1];
-    const fileType = mimeType.split('/')[1];
-    const imgBuffer = Buffer.from(imageData, 'base64');
-
-    return new Promise((resolve, reject) => {
-        const qualityOptions = {
-            quality: settings.quality
-        }
-        if(fileType === 'png') {
-            qualityOptions.palette = true;
-            qualityOptions.compressionLevel = 5;
-            qualityOptions.adaptiveFiltering = true;
-        }
-
-        sharp(imgBuffer)
-            .resize({
-                height: settings.height,
-                width: settings.width,
-                fit: settings.fit,
-                position: settings.position
-            })
-            [fileType](qualityOptions)
-            .toBuffer()
-            .then(data => {
-                const base64image = `data:${mimeType};base64,${data.toString('base64')}`;
-                resolve(base64image);
-            })
-            .catch(err => {
-                console.log(err);
-                reject(err);
-            });
-    })
 }
 
 function convertImage(settings){
