@@ -27,13 +27,8 @@ class Api {
         });
     }
 
-    uploadSingleImage(params = {}, config){
-        const url = '/api/image/upload/single';
-        return this.post(url, params, config);
-    }
-
-    uploadMultipleImages(params = {}, config){
-        const url = '/api/image/upload/multiple';
+    uploadOptimiseImages(params = {}, config){
+        const url = '/api/image/upload/optimise';
         return this.post(url, params, config);
     }
 
@@ -54,11 +49,6 @@ class Api {
 
     convertImage(params = {}, config){
         const url = '/api/image/convert/single';
-        return this.post(url, params, config);
-    }
-
-    convertMultipleImages(params = {}, config){
-        const url = '/api/image/convert/multiple';
         return this.post(url, params, config);
     }
 }
