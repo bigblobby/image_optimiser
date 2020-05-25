@@ -65,14 +65,15 @@ class OptimiserOptions extends React.Component {
                     this.props.triggerUploadComplete(result);
                 });
         } else {
-            Api.uploadSingleImage({
-                image: this.props.images[0].displayImage,
-                width: width,
-                height: height,
-                quality: quality,
-                fitment: this.state.fitment,
-                position: this.state.position
-            }, config).then(result => {
+            const formData = new FormData();
+            formData.append('image', this.props.images[0].uploadImage);
+            formData.append('width', width);
+            formData.append('height', height);
+            formData.append('quality', quality);
+            formData.append('fitment', this.state.fitment);
+            formData.append('position', this.state.position);
+
+            Api.uploadSingleImage(formData, config).then(result => {
                 this.props.triggerUploadComplete(result);
             });
         }

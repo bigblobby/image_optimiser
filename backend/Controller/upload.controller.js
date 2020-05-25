@@ -3,7 +3,8 @@ const MediaHelper = require('../Helpers/media.helper');
 const ZipHelper = require('../Helpers/zip.helper');
 
 async function uploadSingle(req, res){
-    const {image, width, height, quality, fitment, position} = req.body;
+    const image = req.files[0];
+    const {width, height, quality, fitment, position} = req.body;
 
     // TODO validate and sanitise
     const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
@@ -12,26 +13,26 @@ async function uploadSingle(req, res){
     const filterFitment = fitment;
     const filterPosition = position;
 
-    console.log(image);
+    // Database stats
+    const totalSize = image.size;
+    const totalImages = 1;
+    const averageSize = (totalSize / totalImages).toFixed(2);
 
-    // UploadStats.sync().then(() => {
-    //     UploadStats.create({
-    //         total_size: req.body.title,
-    //         total_images: req.body.priority,
-    //         average_size: req.body.completed
-    //     }).then(item => {
-    //         console.log('Upload stat created successfully')
-    //         // res.status(201).json({
-    //         //     item: item,
-    //         //     message: 'Todo created successfully'
-    //         // });
-    //     }).catch((err) => {
-    //         console.error(err);
-    //     });
-    // });
+    UploadStats.sync().then(() => {
+        UploadStats.create({
+            total_size: totalSize,
+            total_images: totalImages,
+            average_size: averageSize
+        }).then(item => {
+            console.log('Upload stat created successfully')
+        }).catch((err) => {
+            console.error(err);
+        });
+    });
 
     const settings = {
-        image: image,
+        mimetype: image.mimetype,
+        filename: image.filename,
         height: filterHeight,
         width: filterWidth,
         quality: filterQuality,
@@ -40,10 +41,11 @@ async function uploadSingle(req, res){
     };
 
     const filteredImage = await MediaHelper.processImage(settings, 'buffer');
+    const zipFile = await ZipHelper.zipFiles([filteredImage]);
 
     res.status(200).json({
-        downloadImage: filteredImage,
-        downloadFilename: null
+        downloadImage: null,
+        downloadFilename: zipFile
     });
 }
 

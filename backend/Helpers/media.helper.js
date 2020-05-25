@@ -27,13 +27,19 @@ async function processImage(settings = {
     quality: 100
 }, preset) {
 
-    if(preset === 'buffer'){
-        return filterWithBuffer(settings);
-    } else if(preset === 'file') {
-        settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
-        const filepath = 'uploads/' + settings.filename;
-        return filterWithFile(filepath, settings);
-    }
+    settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
+    const filepath = 'uploads/' + settings.filename;
+    return filterWithFile(filepath, settings);
+
+    // if(preset === 'buffer'){
+    //     settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
+    //     const filepath = 'uploads/' + settings.filename;
+    //     return filterWithBuffer(filepath, settings);
+    // } else if(preset === 'file') {
+    //     settings.fileType = settings.fileType || settings.mimetype.split('/')[1];
+    //     const filepath = 'uploads/' + settings.filename;
+    //     return filterWithFile(filepath, settings);
+    // }
 }
 
 function filterWithFile(filepath, settings) {
@@ -79,7 +85,7 @@ function filterWithFile(filepath, settings) {
     });
 }
 
-function filterWithBuffer(settings){
+function filterWithBuffer(filepath, settings){
     const parts = settings.image.split(';');
     const mimeType = parts[0].split(':')[1];
     const imageData = parts[1].split(',')[1];
