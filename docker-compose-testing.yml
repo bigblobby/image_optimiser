@@ -11,6 +11,20 @@ services:
             - '/usr/src/app/node_modules'
         environment:
             - NODE_ENV=testing
+        depends_on:
+            - mysql
+
+    mysql:
+        image: mysql:5.7
+        environment:
+            MYSQL_DATABASE: "${DATABASE_NAME}"
+            MYSQL_USER: "${DATABASE_USER}"
+            MYSQL_PASSWORD: "${DATABASE_PASSWORD}"
+            MYSQL_ROOT_PASSWORD: "${DATABASE_PASSWORD}"
+        volumes:
+            - './database:/var/lib/mysql'
+        ports:
+            - 3307:3306
 
     frontend-testing:
         restart: unless-stopped
@@ -23,3 +37,5 @@ services:
             - backend-testing
         ports:
             - "80:80"
+
+
