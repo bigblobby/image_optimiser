@@ -28,7 +28,7 @@ class Api {
     }
 
     uploadOptimiseImages(params = {}, config){
-        const url = '/api/image/upload/optimise';
+        const url = '/api/image/optimise/upload';
         return this.post(url, params, config);
     }
 

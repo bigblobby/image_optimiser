@@ -16,7 +16,7 @@ async function uploadOptimise(req, res){
     // Database stats
     const totalSize = images.reduce((acc, cur) => acc + cur.size, 0);
     const totalImages = images.length;
-    const averageSize = totalSize / totalImages;
+    const averageSize = (totalSize / totalImages).toFixed(2);
 
     UploadStats.sync().then(() => {
         UploadStats.create({

@@ -11,7 +11,7 @@ app.disable('x-powered-by');
 app.disable('X-Powered-By');
 
 // Apps/Routers
-const UploadRouter = require('./Router/upload.router');
+const OptimiseRouter = require('./Router/optimise.router');
 const DownloadRouter = require('./Router/download.router');
 const ConvertRouter = require('./Router/convert.router');
 
@@ -21,7 +21,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: '50mb', extended: false }));
 
 // Routes
-app.use('/api/image/upload', UploadRouter);
+app.use('/api/image/optimise', OptimiseRouter);
 app.use('/api/image/download', DownloadRouter);
 app.use('/api/image/convert', ConvertRouter);
 
