@@ -26,5 +26,6 @@ yarn-error.log*
 
 .idea/*
 backend/uploads
+backend/.env
 data
 database
