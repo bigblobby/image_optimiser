@@ -35,7 +35,7 @@ export default class Navigation extends React.Component {
                             <NavLink to={'/convert'}>Convert</NavLink>
                         </li>
                         <li onClick={this.toggleNav}>
-                            <NavLink to={'/base64'}>Base64</NavLink>
+                            <NavLink to={'/encode'}>Encode</NavLink>
                         </li>
                     </ul>
                 </nav>
