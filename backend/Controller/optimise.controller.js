@@ -4,7 +4,7 @@ const ZipHelper = require('../Helpers/zip.helper');
 
 async function uploadOptimise(req, res){
     const images = req.files;
-    const {width, height, quality, fitment, position} = req.body;
+    const {width, height, quality, fitment, position, output} = req.body;
 
     // TODO validate and sanitise
     const filterWidth = width && !isNaN(width) && width !== 0 ? Number(width) : null;
@@ -12,6 +12,7 @@ async function uploadOptimise(req, res){
     const filterQuality = Number(quality);
     const filterFitment = fitment;
     const filterPosition = position;
+    const filterOutput = output && output !== 'auto' && (output === 'png' || output === 'jpeg' || output === 'webp') ? output : '';
 
     // Database stats
     const totalSize = images.reduce((acc, cur) => acc + cur.size, 0);
@@ -39,7 +40,8 @@ async function uploadOptimise(req, res){
             width: filterWidth,
             quality: filterQuality,
             fit: filterFitment,
-            position: filterPosition
+            position: filterPosition,
+            output: filterOutput
         };
 
         imagePromises.push(MediaHelper.processImage(settings));

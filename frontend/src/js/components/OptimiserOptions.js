@@ -18,7 +18,8 @@ class OptimiserOptions extends React.Component {
             height: '',
             quality: 80,
             fitment: 'cover',
-            position: 'center'
+            position: 'center',
+            output: ''
         }
     }
 
@@ -58,6 +59,7 @@ class OptimiserOptions extends React.Component {
         formData.append('quality', quality);
         formData.append('fitment', this.state.fitment);
         formData.append('position', this.state.position);
+        formData.append('output', this.state.output);
 
         Api.uploadOptimiseImages(formData, config)
             .then(result => {
@@ -142,6 +144,15 @@ class OptimiserOptions extends React.Component {
                             <option value="left bottom">Bottom left</option>
                             <option value="left">Left</option>
                             <option value="left top">Top left</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="options_output">Output</label>
+                        <select className="form-control" name="output" id="options_output" value={this.state.output} onChange={this.handleChange}>
+                            <option value="auto">Auto (default)</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WEBP</option>
+                            <option value="png">PNG</option>
                         </select>
                     </div>
                 </div>

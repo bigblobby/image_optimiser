@@ -32,16 +32,19 @@ async function processImage(settings = {
 }
 
 function filterWithFile(filepath, settings) {
-    const {filename, fileType, height, width, quality, fit, position} = settings;
-    const outputLocation = `./uploads/filter/${ filename }`;
-    const checkedLocation = path.join(__dirname, `../uploads/filter/${ filename}`);
+    const {filename, fileType, height, width, quality, fit, position, output} = settings;
+    const filenameWithoutExtension = filename.slice(0, filename.lastIndexOf('.'));
+    const outputType = output ? output : fileType;
+
+    const outputLocation = `./uploads/filter/${ filenameWithoutExtension }.${ outputType }`;
+    const checkedLocation = path.join(__dirname, `../uploads/filter/${ filenameWithoutExtension }.${ outputType }`);
 
     return new Promise((resolve, reject) => {
         // Check if file exists already, this stops the image being filtered again
         const qualityOptions = {
             quality: quality
         }
-        if(fileType === 'png') {
+        if(outputType === 'png') {
             qualityOptions.palette = true;
             qualityOptions.compressionLevel = 5;
             qualityOptions.adaptiveFiltering = true;
@@ -56,7 +59,8 @@ function filterWithFile(filepath, settings) {
                         fit: fit,
                         position: position
                     })
-                    [fileType](qualityOptions)
+                    [outputType](qualityOptions)
+                    .toFormat(outputType)
                     .toFile(outputLocation)
                     .then(info => {
                         resolve(outputLocation);
