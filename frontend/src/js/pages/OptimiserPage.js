@@ -42,7 +42,7 @@ class OptimiserPage extends React.Component {
                                     handleFiles={this.handleFiles}
                                     text={"Drag and drop your images or click here"}
                                     helpText={"(up to 12 images)"}
-                                    acceptedFileTypes={['image/png', 'image/jpeg']}
+                                    acceptedFileTypes={['image/png', 'image/jpeg', 'image/webp']}
                                 />
                             </div>
                             <div className="control-panel--container">

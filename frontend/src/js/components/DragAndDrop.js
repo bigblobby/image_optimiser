@@ -48,7 +48,7 @@ class DragAndDrop extends React.Component {
         }
     };
 
-    handleDrop = async (e) => {
+    handleDrop = (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -77,7 +77,7 @@ class DragAndDrop extends React.Component {
         e.stopPropagation();
     };
 
-    handleManualUpload = async (e) => {
+    handleManualUpload = (e) => {
         const files = e.target.files;
 
         // If there is an error message present and the file choosen is allowed, remove error.
@@ -90,7 +90,7 @@ class DragAndDrop extends React.Component {
         e.currentTarget.value = '';
     };
 
-    handleFiles = async(files) => {
+    handleFiles = (files) => {
         const self = this;
         let acceptedFiles = files;
 
