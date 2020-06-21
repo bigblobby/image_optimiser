@@ -131,7 +131,7 @@ const mapStateToProps = ({imageOptimiser}) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateDisplayAndUploadFiles: (displayFiles, uploadFiles) => dispatch(updateDisplayAndUploadFiles(displayFiles, uploadFiles)),
+        updateDisplayAndUploadFiles: (images) => dispatch(updateDisplayAndUploadFiles(images)),
         resetOptimiser: () => dispatch(resetOptimiser())
     }
 };
