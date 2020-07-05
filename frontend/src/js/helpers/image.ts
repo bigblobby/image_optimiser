@@ -1,3 +1,4 @@
+
 import { nanoid } from 'nanoid'
 import Api from "../api";
 
@@ -12,18 +13,21 @@ class ImageHelper {
                 reader.addEventListener('load', (e) => {
                     // Create an image to retrieve the width and height only, the image is not used.
                     const image = new Image();
-                    image.src = e.target.result;
+
+                    if (typeof e.target.result === "string") {
+                        image.src = e.target.result;
+                    }
 
                     image.addEventListener('load', (loadImageEvent) => {
-                        // Fixes a bug in firefox
-                        const path = loadImageEvent.path || (loadImageEvent.composedPath && loadImageEvent.composedPath());
+                        const path = loadImageEvent.composedPath && loadImageEvent.composedPath();
+                        const image = path[0] as HTMLImageElement;
 
                         const newFile = {
                             id: nanoid(),
                             displayImage: e.target.result,
                             uploadImage: file,
-                            width: path[0].width,
-                            height: path[0].height
+                            width: image.width,
+                            height: image.height
                         };
 
                         resolve(newFile);
