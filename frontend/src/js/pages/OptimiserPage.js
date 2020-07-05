@@ -1,23 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import OptimiserOptions from "../components/OptimiserOptions";
-import { resetOptimiser, updateDisplayAndUploadFiles } from "../actions/imageOptimiserActions";
 import DragAndDrop from "../components/DragAndDrop";
 import ImageHelper from "../helpers/image";
 import { Helmet } from "react-helmet";
+import withImageUpdaterPage from "../hocs/withImageUpdaterPage";
 
 const MAX_FILESIZE = 5000000;
 
 class OptimiserPage extends React.Component {
-    componentDidMount(){
-        this.props.resetOptimiser();
-    }
-
-    handleFiles = async(files) => {
-        const images = await ImageHelper.fileListBase64(files);
-        this.props.updateDisplayAndUploadFiles(images);
-    };
-
     render() {
         return (
             <>
@@ -39,7 +29,7 @@ class OptimiserPage extends React.Component {
                                 <DragAndDrop
                                     fileLimit={12}
                                     filesizeLimit={MAX_FILESIZE}
-                                    handleFiles={this.handleFiles}
+                                    handleFiles={this.props.handleFiles}
                                     text={"Drag and drop your images or click here"}
                                     helpText={"(up to 12 images)"}
                                     acceptedFileTypes={['image/png', 'image/jpeg', 'image/webp']}
@@ -56,11 +46,4 @@ class OptimiserPage extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateDisplayAndUploadFiles: (images) => dispatch(updateDisplayAndUploadFiles(images)),
-        resetOptimiser: () => dispatch(resetOptimiser())
-    }
-};
-
-export default connect(null, mapDispatchToProps)(OptimiserPage);
+export default withImageUpdaterPage(OptimiserPage);

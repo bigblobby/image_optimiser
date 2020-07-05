@@ -56,9 +56,9 @@ export default class Routes extends React.Component {
                         <Suspense fallback={''}>
                             <Switch>
                                 <Route exact path="/" component={Homepage} />
-                                <Route exact path="/optimise" component={OptimiserPage}/>
-                                <Route exact path="/encode" component={Base64Page}/>
-                                <Route exact path="/convert" component={ConvertPage}/>
+                                <Route exact path="/optimise" component={OptimiserPage} />
+                                <Route exact path="/encode" component={Base64Page} />
+                                <Route exact path="/convert" component={ConvertPage} />
                                 <Route component={Error404Page}/>
                             </Switch>
                         </Suspense>
