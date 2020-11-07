@@ -37,6 +37,9 @@ export default class Navigation extends React.Component {
                         <li onClick={this.toggleNav}>
                             <NavLink to={'/encode'}>Encode</NavLink>
                         </li>
+                        <li onClick={this.toggleNav}>
+                            <NavLink to={'/site-check'}>Site Checker</NavLink>
+                        </li>
                     </ul>
                 </nav>
             </>

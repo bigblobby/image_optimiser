@@ -51,6 +51,12 @@ class Api {
         const url = '/api/image/convert/single';
         return this.post(url, params, config);
     }
+
+    checkSite(params){
+        const uri = '/api/site-check';
+
+        return this.post(uri, params);
+    }
 }
 
 export default new Api();

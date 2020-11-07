@@ -19,7 +19,7 @@ class ImageHelper {
 
                     image.addEventListener('load', (loadImageEvent) => {
                         const path = loadImageEvent.composedPath && loadImageEvent.composedPath();
-                        const image = path[0] as HTMLImageElement;
+                        const image = path[0];
 
                         const newFile = {
                             id: nanoid(),

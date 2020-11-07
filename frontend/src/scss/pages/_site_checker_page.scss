@@ -1,0 +1,25 @@
+.site-checker-page {
+    margin-top: 3rem;
+
+    .site-check {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .result-message {
+        padding: 1rem;
+        border-radius: 4px;
+
+        &--success {
+            background-color: lighten($chateau_green, 50);
+        }
+
+        &--error {
+            background-color: lighten($persimmon, 20);
+        }
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}

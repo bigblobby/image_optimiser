@@ -14,6 +14,7 @@ app.disable('X-Powered-By');
 const OptimiseRouter = require('./Router/optimise.router');
 const DownloadRouter = require('./Router/download.router');
 const ConvertRouter = require('./Router/convert.router');
+const SiteCheckerRouter = require('./Router/site-checker.router');
 
 // Middleware
 app.use(morgan('dev'));
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: false }));
 app.use('/api/image/optimise', OptimiseRouter);
 app.use('/api/image/download', DownloadRouter);
 app.use('/api/image/convert', ConvertRouter);
+app.use('/api/site-check', SiteCheckerRouter);
 
 async function startServer() {
     try {

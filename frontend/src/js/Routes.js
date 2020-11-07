@@ -33,6 +33,7 @@ const Homepage = React.lazy(() => import("./pages/Homepage"));
 const OptimiserPage = React.lazy(() => import("./pages/OptimiserPage"));
 const Base64Page = React.lazy(() => import("./pages/Base64Page"));
 const ConvertPage = React.lazy(() => import("./pages/ConvertPage"));
+const SiteCheckerPage = React.lazy(() => import("./pages/SiteCheckerPage"));
 const Error404Page = React.lazy(() => import("./pages/Error404Page"));
 
 export default class Routes extends React.Component {
@@ -59,6 +60,7 @@ export default class Routes extends React.Component {
                                 <Route exact path="/optimise" component={OptimiserPage} />
                                 <Route exact path="/encode" component={Base64Page} />
                                 <Route exact path="/convert" component={ConvertPage} />
+                                <Route exact path="/site-check" component={SiteCheckerPage} />
                                 <Route component={Error404Page}/>
                             </Switch>
                         </Suspense>
