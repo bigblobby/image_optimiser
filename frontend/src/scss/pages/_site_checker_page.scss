@@ -22,4 +22,62 @@
             text-decoration: underline;
         }
     }
+
+    .site-list {
+        max-width: 700px;
+        margin: 0 auto;
+
+        .site-driver {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            padding: 1rem;
+
+            &--green {
+                background-color: lighten($chateau_green, 50);
+            }
+
+            &--red {
+                background-color: lighten($persimmon, 20);
+            }
+
+            &__name {
+                display: flex;
+                align-items: center;
+            }
+
+            &__info {
+                display: flex;
+            }
+
+            &__status {
+                display: flex;
+                align-items: center;
+            }
+
+            &__badge {
+                padding: 0.2rem 1rem;
+                margin-right: 0.5rem;
+                border-radius: 4px;
+
+                &--green {
+                    background-color: $chateau_green;
+                }
+
+                &--red {
+                    background-color: $persimmon;
+                }
+            }
+
+            &__date {
+                display: flex;
+                flex-direction: column;
+                font-size: 0.7rem;
+            }
+
+            &__actions {
+                margin-left: 1rem;
+            }
+        }
+    }
 }
