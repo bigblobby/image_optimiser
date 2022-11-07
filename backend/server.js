@@ -4,7 +4,6 @@ const http = require('http');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const sequelize = require('./db');
 const port = process.env.PORT;
 
 app.disable('x-powered-by');
@@ -29,17 +28,9 @@ app.use('/api/site-check', SiteCheckerRouter);
 
 async function startServer() {
     try {
-        sequelize
-            .authenticate()
-            .then(() => {
-                console.log('Connection has been established successfully.');
-            })
-            .catch(err => {
-                console.error('Unable to connect to the database:', err);
-            });
-
         http.createServer(app).listen(port);
         https.createServer({}, app).listen(443);
+        console.log(`Listening on port ${port}`);
     } catch(e) {
         console.error(e);
     }

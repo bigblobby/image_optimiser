@@ -1,4 +1,3 @@
-const UploadStats = require('../Model/upload_stats.model');
 const MediaHelper = require('../Helpers/media.helper');
 const ZipHelper = require('../Helpers/zip.helper');
 
@@ -13,23 +12,6 @@ async function uploadOptimise(req, res){
     const filterFitment = fitment;
     const filterPosition = position;
     const filterOutput = output && output !== 'auto' && (output === 'png' || output === 'jpeg' || output === 'webp') ? output : '';
-
-    // Database stats
-    const totalSize = images.reduce((acc, cur) => acc + cur.size, 0);
-    const totalImages = images.length;
-    const averageSize = (totalSize / totalImages).toFixed(2);
-
-    UploadStats.sync().then(() => {
-        UploadStats.create({
-            total_size: totalSize,
-            total_images: totalImages,
-            average_size: averageSize
-        }).then(item => {
-            console.log('Upload stat created successfully')
-        }).catch((err) => {
-            console.error(err);
-        });
-    });
 
     const imagePromises = [];
     images.forEach(image => {
