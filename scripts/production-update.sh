@@ -8,7 +8,7 @@ git pull
 
 # Step 2 - update docker images
 echo "Step 2 of 3: Updating docker images and running containers"
-docker-compose -f docker-compose-prod.yml up --build -d
+docker compose -f docker-compose-prod.yml up --build -d
 
 # Step 3 - remove dangling images
 echo "Step 3 of 3: Cleaning up dead docker images"
