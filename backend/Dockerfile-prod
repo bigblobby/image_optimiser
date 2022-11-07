@@ -1,5 +1,5 @@
-FROM ubuntu:eoan
-ARG VIPS_VERSION=8.9.1
+FROM ubuntu:jammy
+ARG VIPS_VERSION=8.13.2
 ARG VIPS_URL=https://github.com/libvips/libvips/releases/download
 
 # basic build tools
@@ -13,7 +13,7 @@ RUN cd /usr/local/src  && wget ${VIPS_URL}/v${VIPS_VERSION}/vips-${VIPS_VERSION}
 RUN cd /usr/local/src/vips-${VIPS_VERSION} && ./configure && make && make install && ldconfig
 
 # nodejs and Yarn
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y nodejs yarn
