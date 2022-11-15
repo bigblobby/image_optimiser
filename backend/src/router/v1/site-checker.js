@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../Controller/site-checker.controller');
+const controller = require('../../controller/site-checker');
 
 router.post('/', controller.checkSite);
 

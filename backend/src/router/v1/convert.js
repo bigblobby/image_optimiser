@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const controller = require('../Controller/convert.controller');
-const upload = require('../Config/multer').upload;
+const controller = require('../../controller/convert');
+const upload = require('../../config/multer').upload;
 
 router.post('/single', controller.convertSingle);
 router.post('/multiple', upload.array('images'), controller.convertMultiple);

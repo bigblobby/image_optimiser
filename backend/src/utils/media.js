@@ -36,8 +36,8 @@ function filterWithFile(filepath, settings) {
     const filenameWithoutExtension = filename.slice(0, filename.lastIndexOf('.'));
     const outputType = output ? output : fileType;
 
-    const outputLocation = `./uploads/filter/${ filenameWithoutExtension }.${ outputType }`;
-    const checkedLocation = path.join(__dirname, `../uploads/filter/${ filenameWithoutExtension }.${ outputType }`);
+    const outputLocation = path.join(__dirname, `../../uploads/filter/${ filenameWithoutExtension }.${ outputType }`);
+    const checkedLocation = path.join(__dirname, `../../uploads/filter/${ filenameWithoutExtension }.${ outputType }`);
 
     return new Promise((resolve, reject) => {
         // Check if file exists already, this stops the image being filtered again

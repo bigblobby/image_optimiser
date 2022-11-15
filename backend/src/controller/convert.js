@@ -1,8 +1,8 @@
-const MediaHelper = require('../Helpers/media.helper');
-const ZipHelper = require('../Helpers/zip.helper');
+const mediaUtil = require('../utils/media');
+const zipUtil = require('../utils/zip');
 
 function convertSingle(req, res){
-    MediaHelper.convertImage(req.body)
+    mediaUtil.convertImage(req.body)
         .then(result => {
             res.status(200).json({
                 downloadImage: result,
@@ -25,12 +25,12 @@ async function convertMultiple(req, res){
             fileType: outputFiletype
         };
 
-        imagePromises.push(MediaHelper.processImage(settings, 'file'));
+        imagePromises.push(mediaUtil.processImage(settings, 'file'));
     });
 
     const filteredImages = await Promise.all(imagePromises);
     console.log(filteredImages);
-    const zipFile = await ZipHelper.zipFiles(filteredImages);
+    const zipFile = await zipUtil.zipFiles(filteredImages);
 
     res.status(200).json({
         downloadImage: null,

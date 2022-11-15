@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../Controller/download.controller');
+const controller = require('../../controller/download');
 
 router.get('/zip/:filename', controller.downloadZip);
 

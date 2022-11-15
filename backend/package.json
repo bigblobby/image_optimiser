@@ -16,8 +16,8 @@
         "nodemon": "^2.0.2"
     },
     "scripts": {
-        "start": "node app.js",
-        "dev": "nodemon app.js",
-        "inspect": "nodemon --inspect app.js"
+        "start": "node src/bin/index.js",
+        "dev": "nodemon src/bin/index.js",
+        "inspect": "nodemon --inspect src/bin/index.js"
     }
 }

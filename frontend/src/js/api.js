@@ -28,7 +28,7 @@ class Api {
     }
 
     uploadOptimiseImages(params = {}, config){
-        const url = '/api/image/optimise/upload';
+        const url = '/api/v1/image/optimise/upload';
         return this.post(url, params, config);
     }
 
@@ -48,12 +48,12 @@ class Api {
     }
 
     convertImage(params = {}, config){
-        const url = '/api/image/convert/single';
+        const url = '/api/v1/image/convert/single';
         return this.post(url, params, config);
     }
 
     checkSite(params){
-        const uri = '/api/site-check';
+        const uri = '/api/v1/site-check';
 
         return this.post(uri, params);
     }

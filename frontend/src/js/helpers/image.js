@@ -45,7 +45,7 @@ class ImageHelper {
     }
 
     retrieveZipFile(filename){
-        Api.downloadZip(`/api/image/download/zip/${filename}`)
+        Api.downloadZip(`/api/v1/image/download/zip/${filename}`)
             .then(result => {
                 const link = document.createElement('a');
                 link.href = result;

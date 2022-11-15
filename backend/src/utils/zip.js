@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const JSZip = require('jszip');
 const uuid = require('uuid/v4');
 
@@ -15,7 +16,7 @@ async function zipFiles(images){
 
     zip
         .generateNodeStream({type:'nodebuffer', streamFiles:true})
-        .pipe(fs.createWriteStream(`./uploads/filter/${zipName}.zip`))
+        .pipe(fs.createWriteStream(path.join(__dirname, `../../uploads/filter/${zipName}.zip`)))
         .on('finish', function () {
             // JSZip generates a readable stream with a "end" event,
             // but is piped here in a writable stream which emits a "finish" event.

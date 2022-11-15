@@ -1,5 +1,5 @@
-const MediaHelper = require('../Helpers/media.helper');
-const ZipHelper = require('../Helpers/zip.helper');
+const mediaUtil = require('../utils/media');
+const zipUtil = require('../utils/zip');
 
 async function uploadOptimise(req, res){
     const images = req.files;
@@ -26,11 +26,11 @@ async function uploadOptimise(req, res){
             output: filterOutput
         };
 
-        imagePromises.push(MediaHelper.processImage(settings));
+        imagePromises.push(mediaUtil.processImage(settings));
     });
 
     const filteredImages = await Promise.all(imagePromises);
-    const zipFile = await ZipHelper.zipFiles(filteredImages);
+    const zipFile = await zipUtil.zipFiles(filteredImages);
 
     res.status(200).json({
         downloadImage: null,
