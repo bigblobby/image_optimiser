@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const router = require('../router');
+const router = require('../routes');
 
 app.disable('x-powered-by');
 app.disable('X-Powered-By');
