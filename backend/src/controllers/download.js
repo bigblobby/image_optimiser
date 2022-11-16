@@ -8,7 +8,6 @@ const downloadController = {
 
         res.setHeader('Content-disposition', 'attachment');
         res.setHeader('Content-type', mimetype);
-
         fs.createReadStream(file).pipe(res);
     }
 }
