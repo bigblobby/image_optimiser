@@ -10,9 +10,9 @@ const convertController = {
                     downloadFilename: null
                 });
             }).catch(err => {
-            console.log(err);
-            res.status(500).json({error: 'There has been an error.'});
-        });
+                console.log(err);
+                res.status(500).json({error: 'There has been an error.'});
+            });
     },
 
     async convertMultiple(req, res){
